@@ -1,4 +1,4 @@
-from logging import log
+from logHandler import log
 import api
 from oleacc import *
 import addonHandler
@@ -42,12 +42,28 @@ def getObjectByHierarchy ( oParent, sHierarchy):
 
 			return o
 	except:
-		log.error("error getObjectByHierarchy")
+		log.info("error getObjectByHierarchy %s" %sHierarchy)
 		
 	return None
+	
 def objectMainFrame():
-	o = api.getForegroundObject().IAccessibleObject
-	return o
+	
+	oDesktop = api.getDesktopObject()
+	desktopName = oDesktop.name.lower()
+
+	o = api.getFocusObject()
+	while o:
+		#oTop  = api.getForegroundObject()
+		oGParent= o.parent.parent
+		if oGParent.name.lower() == desktopName:
+			return o.IAccessibleObject
+		
+		o = o.parent
+			
+	log.error("error no objectMainFrame")
+	return None
+
+		
 
 def objectLockingTool1 ():
 	o = objectMainFrame()
@@ -129,6 +145,8 @@ def objectPlayButton ():
 	o = objectTransportToolBar()
 	if o :
 		return getObjectByHierarchy(o, HIE_PlayButton)
+	else:
+		log.error(" error objectPlayButton: no play button")
 
 	return None
 	
@@ -146,12 +164,14 @@ def isPressed( button):
 		"pause" : objectPauseButton,
 		"stop": objectStopButton
 		}
+
 	try:
 		o = buttonsDic[button]()
 	except:
-		print "error, no button"
+		log.error ("error, no button")
 		return None
-	if o.accState(0) & STATE_SYSTEM_PRESSED :
+		
+	if o and o.accState(0) & STATE_SYSTEM_PRESSED :
 		return True
 		
 	return False

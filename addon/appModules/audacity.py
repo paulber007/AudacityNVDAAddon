@@ -38,18 +38,11 @@ class Button(IAccessible):
 			obj.doAction()
 		except:
 			pass
-		#self.event_stateChange()
+
 		eventHandler.queueEvent("gainFocus",obj)
 
 
-	
-	script_spaceKey.__doc__ = _audacityCommandKeyMsg
-	
-		
 
-
-	
-	script_spaceKey.__doc__ = _audacityCommandKeyMsg
 
 
 class InTracksPanelView(Window):

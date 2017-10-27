@@ -21,6 +21,12 @@ Dernière modification: %%date(%d/%m/%Y)
 
 
 
+
++ v1.1 (21 Avril 2014) +
+ correction de bugs:
+- signalement d'une erreur après utilisation d'un filtre
+
+
 + v1.0 (24 janvier 2014) +
 Création du module complémentaire 
 

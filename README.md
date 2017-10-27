@@ -13,4 +13,4 @@ This add-on adds extra functionality when working with Audacity
 * possibilit of using of spacebar to press a button.
 
 
-[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/audacity/audacity-1.0.nvda-addon
+[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/audacity/audacity-1.1.nvda-addon
