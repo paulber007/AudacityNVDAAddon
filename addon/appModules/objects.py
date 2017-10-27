@@ -2,31 +2,69 @@ from logHandler import log
 import api
 from oleacc import *
 from controlTypes import *
+
 import addonHandler
 addonHandler.initTranslation()
 
 #object hierarchy
+HIE_VueDePiste= 1
+HIE_LockingTool1 = 2
+HIE_LockingTool2 = 3
+HIE_TransportToolBar = 4
+HIE_PauseButton = 5
+HIE_PlayButton = 6
+HIE_StopButton = 7
+HIE_RecordButton = 8
+HIE_SelectionToolBar = 9
+HIE_DurationChoice = 10
+HIE_SelectionStart = 11
+HIE_SelectionEnd = 12
+HIE_AudioPosition = 13
+
+hie_2060 = {
+	HIE_VueDePiste: "1|1", # par rapport  mainFrameObject
+	HIE_LockingTool1 : "2", # par rapport  mainFrameObject
+	HIE_LockingTool2 : "3", # par rapport  mainFrameObject
+	HIE_TransportToolBar : "0", # par rapport  HIE_LockingTool1  object
+	HIE_PauseButton : "1", # par rapport  HIE_TransportToolBar  object
+	HIE_PlayButton : "2", # par rapport  HIE_TransportToolBar 
+	HIE_StopButton : "3", # par rapport  HIE_TransportToolBar 
+	HIE_RecordButton : "6", # par rapport  HIE_TransportToolBar 
+	HIE_SelectionToolBar : "0", # par rapport  HIE_LockingTool2  object
+	HIE_DurationChoice : "5", # par rapport  HIE_SelectionToolBar 
+	HIE_SelectionStart : "11", # par rapport  HIE_SelectionToolBar object
+	HIE_SelectionEnd : "12", # par rapport  HIE_SelectionToolBar object
+	HIE_AudioPosition : "14" # par rapport  HIE_SelectionToolBar object
+	}
+
+	
+hie_2030 = {
+	HIE_VueDePiste: "1|1", # par rapport  objectFramePrincipal
+	HIE_LockingTool1 : "2", # par rapport  ObjectFramePrincipal
+	HIE_LockingTool2 : "3", # par rapport  ObjectFramePrincipal
+	HIE_TransportToolBar : "0", # par rapport  HIE_VerrouillageDOutils1
+	HIE_PauseButton : "1", # par rapport  HIE_BarreDOutilsTransport
+	HIE_PlayButton : "2", # par rapport  HIE_BarreDOutilsTransport
+	HIE_StopButton : "3", # par rapport  HIE_BarreDOutilsTransport
+	HIE_RecordButton : "6", # par rapport  HIE_BarreDOutilsTransport
+	HIE_SelectionToolBar : "0", # par rapport  LockingTool2 Object
+	HIE_DurationChoice : "4", # par rapport  HIE_BarreDOutilsSelection
+	HIE_SelectionStart : "10", # par rapport  HIE_BarreDOutilsSelection
+	HIE_SelectionEnd : "11", # par rapport  HIE_BarreDOutilsSelection
+	HIE_AudioPosition : "13" # par rapport  HIE_BarreDOutilsSelection
+	}
 
 
-HIE_VueDePiste= "1|1" # par rapport  objectFramePrincipal
-HIE_LockingTool1 = "2"# par rapport  ObjectFramePrincipal
-HIE_LockingTool2 = "3" # par rapport  ObjectFramePrincipal
-HIE_TransportToolBar = "0" # par rapport  HIE_VerrouillageDOutils1
-HIE_PauseButton = "1" # par rapport  HIE_BarreDOutilsTransport
-HIE_PlayButton = "2" # par rapport  HIE_BarreDOutilsTransport
-HIE_StopButton = "3" # par rapport  HIE_BarreDOutilsTransport
-HIE_RecordButton = "6" # par rapport  HIE_BarreDOutilsTransport
 
-
-HIE_SelectionToolBar = "0" # par rapport  objectFramePrincipal
-HIE_ChoixFin = "2" # par rapport  HIE_BarreDOutilsSelection
-HIE_DurationChoice = "4" # par rapport  HIE_BarreDOutilsSelection
-HIE_SelectionStart = "10" # par rapport  HIE_BarreDOutilsSelection
-HIE_SelectionEnd = "11" # par rapport  HIE_BarreDOutilsSelection
-HIE_AudioPosition = "13" # par rapport  HIE_BarreDOutilsSelection
-
-
-def getObjectByHierarchy ( oParent, sHierarchy):
+def getObjectByHierarchy ( oParent, iHierarchy):
+	appModule = oParent.appModule
+	audacityID = int("".join(appModule._get_productVersion().split(",")))
+	if audacityID >= 2060:
+		hie = hie_2060
+	else:
+		hie = hie_2030
+	sHierarchy = hie[iHierarchy]
+	
 	try:
 		o = oParent
 		if len(sHierarchy):

@@ -38,7 +38,9 @@ Ce module complémentaire  apporte:
 
 
 ++ Compatibilité ++
-Ce module a été testé avec la version 2.03 d'Audacity sous  NVDA 2014.1 et 2014.2.
+Ce module a été testé avec la version 2.03, 2.05 et 2.06  d'Audacity sous  NVDA 2014.3.
+Il n'est pas compatible avec les versions deNVDA antérieures à la version 2014.3.
+
 
 ++ Configuration à respecter ++
 Pour un bon fonctionnement du module, il est nécessaire de :

@@ -11,11 +11,12 @@ import api
 from NVDAObjects.window import Window
 from NVDAObjects.IAccessible import IAccessible
 import time
-import addonHandler
-from audacity_docHandler import openDocPath
 from  objects import isPressed, inTracksPanelView
 import timerControl
 import ou_time
+import addonHandler
+
+
 
 addonHandler.initTranslation()
 
@@ -29,6 +30,7 @@ GB_audioPosition = None
 GB_selection = None
 # record button state monitor
 GB_recordButtonPressed = None
+
 
 
 
@@ -231,20 +233,9 @@ class AppModule(appModuleHandler.AppModule):
 
 		super(AppModule, self).__init__(*args, **kwargs)
 
-		
-		# set help menu
-		self.help = gui.mainFrame.sysTrayIcon.helpMenu
-		self.helpItem = self.help.Append(wx.ID_ANY, u"{summary} {version}".format(summary=_addonSummary, version=_addonVersion), _addonName)
-		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onHelp, self.helpItem)
-		
-	def onHelp(self, evt):
-		openDocPath()		
-		
-	def terminate(self):
-		try:
-			self.help.RemoveItem(self.helpItem)
-		except wx.PyDeadObjectError:
-			pass
+
+	
+
 			
 	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.ROLE_BUTTON:

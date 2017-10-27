@@ -33,7 +33,7 @@ class TimerControl(object):
 	def getLabelAndTime(self):
 		timerControlName = self.name
 		if len(timerControlName) < 18:
-			retur  (timerControlName, None)
+			return  (timerControlName, None)
 
 		if "+" in timerControlName:
 			# +samples
