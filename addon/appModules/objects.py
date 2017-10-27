@@ -1,29 +1,29 @@
 from logHandler import log
 import api
 from oleacc import *
+from controlTypes import *
 import addonHandler
 addonHandler.initTranslation()
 
 #object hierarchy
 
 
-HIE_ApplicationBarreDeMenus= "3" #par rapport au parent de ObjectFramePrincipal
-HIE_MenuLecture = "4|1|1" # par rapport  ObjectApplicationBarreDeMenus
-HIE_VueDePiste= "2|1" # par rapport  objectFramePrincipal
-HIE_LockingTool1 = "3"# par rapport  ObjectFramePrincipal
-HIE_LockingTool2 = "4" # par rapport  ObjectFramePrincipal
-HIE_TransportToolBar = "1" # par rapport  HIE_VerrouillageDOutils1
-HIE_PauseButton = "2" # par rapport  HIE_BarreDOutilsTransport
-HIE_PlayButton = "3" # par rapport  HIE_BarreDOutilsTransport
-HIE_StopButton = "4" # par rapport  HIE_BarreDOutilsTransport
-HIE_Frame = "5" #par rapport  ObjectFramePrincipal
-HIE_SelectionToolBar = "1" # par rapport  HIE_Frame
-HIE_ChoixFin = "4" # par rapport  HIE_BarreDOutilsSelection
-HIE_DurationChoice = "5" # par rapport  HIE_BarreDOutilsSelection
-HIE_SelectionStart = "11" # par rapport  HIE_BarreDOutilsSelection
-HIE_SelectionEnd = "12" # par rapport  HIE_BarreDOutilsSelection
-HIE_AudioPosition = "14" # par rapport  HIE_BarreDOutilsSelection
+HIE_VueDePiste= "1|1" # par rapport  objectFramePrincipal
+HIE_LockingTool1 = "2"# par rapport  ObjectFramePrincipal
+HIE_LockingTool2 = "3" # par rapport  ObjectFramePrincipal
+HIE_TransportToolBar = "0" # par rapport  HIE_VerrouillageDOutils1
+HIE_PauseButton = "1" # par rapport  HIE_BarreDOutilsTransport
+HIE_PlayButton = "2" # par rapport  HIE_BarreDOutilsTransport
+HIE_StopButton = "3" # par rapport  HIE_BarreDOutilsTransport
+HIE_RecordButton = "6" # par rapport  HIE_BarreDOutilsTransport
 
+
+HIE_SelectionToolBar = "0" # par rapport  objectFramePrincipal
+HIE_ChoixFin = "2" # par rapport  HIE_BarreDOutilsSelection
+HIE_DurationChoice = "4" # par rapport  HIE_BarreDOutilsSelection
+HIE_SelectionStart = "10" # par rapport  HIE_BarreDOutilsSelection
+HIE_SelectionEnd = "11" # par rapport  HIE_BarreDOutilsSelection
+HIE_AudioPosition = "13" # par rapport  HIE_BarreDOutilsSelection
 
 
 def getObjectByHierarchy ( oParent, sHierarchy):
@@ -33,8 +33,8 @@ def getObjectByHierarchy ( oParent, sHierarchy):
 			Hierarchy = sHierarchy.split("|")
 			for i in Hierarchy:
 				iChild  = int(i)
-				if o and iChild <= o.accChildCount:
-					o = o.accChild(iChild)
+				if o and iChild <= o.childCount:
+					o = o.getChild(iChild)
 
 				else:
 					# error, no child
@@ -53,10 +53,9 @@ def objectMainFrame():
 
 	o = api.getFocusObject()
 	while o:
-		#oTop  = api.getForegroundObject()
 		oGParent= o.parent.parent
-		if oGParent.name.lower() == desktopName:
-			return o.IAccessibleObject
+		if oGParent and oGParent.name.lower() == desktopName:
+			return o
 		
 		o = o.parent
 			
@@ -91,13 +90,15 @@ def objectSelectionToolBar():
 
 	o = objectMainFrame()
 	if o:
-		o= o.accChild(1)
-		while o:
-			if (o.accName(0) =="frame"
-				and o.accChild(1).accName(0) == _("Selection tool bar")):
-								return o.accChild(1)
+		o= o.getChild(1)
+		count = o.childCount
+		while count:
+			count = count-1
+			if (o.name =="frame"
+				and o.getChild(1).name == _("Selection tool bar")):
+								return o.getChild(1)
 
-			o = o.accNavigate(NAVDIR_NEXT,0)
+			o = o.next
 
 	return None
 
@@ -145,8 +146,6 @@ def objectPlayButton ():
 	o = objectTransportToolBar()
 	if o :
 		return getObjectByHierarchy(o, HIE_PlayButton)
-	else:
-		log.error(" error objectPlayButton: no play button")
 
 	return None
 	
@@ -155,25 +154,50 @@ def objectStopButton():
 	o = objectTransportToolBar()
 	if o :
 		return getObjectByHierarchy(o, HIE_StopButton)
-		
 
 	return None
-def isPressed( button):
-	buttonsDic = {
+		
+def objectRecordButton():
+	o = objectTransportToolBar()
+	if o :
+		return getObjectByHierarchy(o, HIE_RecordButton)
+		
+	return None
+
+_buttonObjectsDic = {
 		"play": objectPlayButton,
 		"pause" : objectPauseButton,
-		"stop": objectStopButton
+		"stop": objectStopButton,
+		"record": objectRecordButton
 		}
 
+def isPressed( button):
 	try:
-		o = buttonsDic[button]()
+		o = _buttonObjectsDic[button]()
 	except:
-		log.error ("error, no button")
+		pass
 		return None
 		
-	if o and o.accState(0) & STATE_SYSTEM_PRESSED :
+	if o and o.IAccessibleObject.accState(0) & STATE_SYSTEM_PRESSED :
 		return True
 		
 	return False
-	
+
+def isChecked(check):
+	if check == "durationChoice":
+		o = objectDurationChoice()
+	else:
+		# error
+		return None
 		
+	return STATE_CHECKED in o.states
+		
+def inTracksPanelView(obj = None):
+	if obj == None:
+		obj = api.getFocusObject().IAccessibleObject
+
+	if ((obj.role == ROLE_PANE and obj.name == "panel") 
+		or (obj.role == ROLE_TABLE and obj.parent.name == "panel")
+		or (obj.role == ROLE_TABLEROW and obj.parent.parent.name == "panel")):
+		return True
+	return False

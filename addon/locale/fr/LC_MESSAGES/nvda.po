@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Visu2ScriptAppModule\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 11:14+0100\n"
-"PO-Revision-Date: 2014-04-11 11:17+0100\n"
+"POT-Creation-Date: 2014-05-13 15:02+0100\n"
+"PO-Revision-Date: 2014-05-13 15:02+0100\n"
 "Last-Translator: Paul ( french scriptNVDA list)\n"
 "Language-Team: paul from scriptNVDA\n"
 "Language: fr_FR\n"
@@ -17,94 +17,158 @@ msgstr ""
 "X-Poedit-Bookmarks: -1,-1,-1,96,-1,-1,-1,-1,-1,-1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: audacity.py:28
-msgid "Reserved: see Audacity command keys"
-msgstr "Réservé: voir les commandes clavier d'audacity"
+#: audacity.py:50
+msgid "Record stopped"
+msgstr "Arrêt de l'enregistrement"
+
+#: audacity.py:52
+msgid "Record"
+msgstr "Enregistrement"
+
+#: audacity.py:150
+msgid "hour"
+msgstr "heure"
+
+#: audacity.py:151
+msgid "minute"
+msgstr "minute"
+
+#: audacity.py:152
+msgid "second"
+msgstr "seconde"
+
+#: audacity.py:157
+msgid "hour ten"
+msgstr "dizaine d'heure"
+
+#: audacity.py:158
+msgid "hours unit"
+msgstr "unité d'heure"
+
+#: audacity.py:159
+msgid "minutes ten"
+msgstr "dizaine de minute"
+
+#: audacity.py:160
+msgid "minutes unit"
+msgstr "unité de minute"
 
 #: audacity.py:161
+msgid "seconds ten"
+msgstr "dizaine de seconde"
+
+#: audacity.py:162
+msgid "seconds unit"
+msgstr "unité de seconde"
+
+#: audacity.py:163
+msgid "seconds tenth"
+msgstr "dixième de seconde"
+
+#: audacity.py:164
+msgid "seconds hundredth"
+msgstr "centième de seconde"
+
+#: audacity.py:165
+msgid "seconds thousandth"
+msgstr "millième de seconde"
+
+#: audacity.py:187
+msgid "tenth"
+msgstr "dixième"
+
+#: audacity.py:187
+msgid "hundredth"
+msgstr "centième"
+
+#: audacity.py:187
+msgid "thousandth"
+msgstr "millième"
+
+#: audacity.py:322
 msgid "report audio position"
 msgstr "Annonce la position du curseur audio"
 
-#: audacity.py:166
+#: audacity.py:327
 msgid "report start and end of selection"
 msgstr "Annonce le début et la fin de la sélection"
 
-#: audacity.py:171
+#: audacity.py:332
 msgid "report the state of Pause and Play buttons"
 msgstr "Annonce l'état des boutons \"lecture\" et \"Pause\""
 
-#: audacity.py:214
-msgid "reserved"
-msgstr "Réservé\""
-
-#: objects.py:81
+#: objects.py:99
 msgid "Selection tool bar"
 msgstr "Barre doutils Sélection"
 
-#: ou_time.py:50
+#: ou_time.py:51
 msgid "one hour"
 msgstr "une heure"
 
-#: ou_time.py:52
+#: ou_time.py:53
 #, python-format
 msgid "%s hours"
 msgstr "%s heures"
 
-#: ou_time.py:58
+#: ou_time.py:59
 msgid "1 minute"
 msgstr "Une minute"
 
-#: ou_time.py:60
+#: ou_time.py:61
 #, python-format
 msgid "%s minutes"
 msgstr "%s minutes"
 
-#: ou_time.py:67
+#: ou_time.py:68
 msgid "1 second {0}"
 msgstr "une seconde {0}"
 
-#: ou_time.py:69
+#: ou_time.py:70
 msgid "{0} seconds {1}"
 msgstr "{0} secondes {1}"
 
-#: ou_time.py:72
+#: ou_time.py:73
 #, python-format
 msgid "0 second %s"
 msgstr "0 seconde %s"
 
-#: ou_time.py:77
+#: ou_time.py:78
 #, python-format
 msgid "%s second"
 msgstr "%s secondes"
 
-#: ou_time.py:80
+#: ou_time.py:81
 msgid "0 second"
 msgstr "0 seconde"
 
-#: utils.py:41
-msgid "Audio position at selection's start"
-msgstr "Position audio en début de sélection"
-
-#: utils.py:52
+#: utils.py:57
 msgid "Audio position at start of track"
 msgstr "Position audio en début de piste"
 
-#: utils.py:151
+#: utils.py:74
+msgid "Audio position at selection's start"
+msgstr "Position audio en début de sélection"
+
+#: utils.py:175
 msgid "no selection"
 msgstr "Aucune sélection"
 
-#: utils.py:161
+#: utils.py:183
 msgid "pause"
 msgstr "pause"
 
-#: utils.py:165
-msgid "Pause button pressed"
-msgstr "Bouton pause enfoncé"
+#: utils.py:187
+msgid "record button pressed"
+msgstr "Bouton enregistrement enfoncé"
 
-#: utils.py:167
+#: utils.py:193
 msgid "play button pressed"
 msgstr "bouton lecture enfoncé"
 
-#: utils.py:169
-msgid "play stopped"
-msgstr "lecture arrêtée"
+#: utils.py:195
+msgid "Pause button pressed"
+msgstr "Bouton pause enfoncé"
+
+#: utils.py:198
+msgid "Play button released"
+msgstr "bouton lecture relaché"

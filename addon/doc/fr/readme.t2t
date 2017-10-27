@@ -1,4 +1,4 @@
-﻿Module complémentaire pour Audacity - manuel utilisateur
+Module complémentaire pour Audacity - manuel utilisateur
 auteur: paul de la liste scriptnvda
 Dernière modification: %%date(%d/%m/%Y)
 
@@ -29,23 +29,22 @@ Dernière modification: %%date(%d/%m/%Y)
 Ce module complémentaire  apporte:
 
 - [un script pour annoncer la position du curseur audio #HDR1],
-- [un script pour annoncer le début et fin de sélection #HDR2], 
-- [un script pour connaitre l'état des boutons "Lecture" et "Pause" #HDR3],
+- [un script pour annoncer le début et la fin de sélection #HDR2], 
+- [un script pour connaître l'état des boutons "Lecture" et "Pause" #HDR3],
 - [l'annonce automatique de la position audio #HDR4],
 - [l'annonce automatique de la sélection #HDR5],
-- [l'utilisation possible de la barre d'espace pour appuyer sur un bouton #HDR6].
+- [l'utilisation possible de la barre d'espace pour appuyer sur un bouton #HDR6],
+- [amélioration des zone d'édition d'un temps de la barre d'outils Sélection Audacity  #HDR7].
 
 
 ++ Compatibilité ++
-Ce module a été testé avec la version 2.0.3 d'Audacity.
-Ce module n'est pas compatible avec les versions de NVDA inférieures à la version 2013.3 dont il utilise la nouvelle possibilité de rangement des scripts par catégorie.
+Ce module a été testé avec la version 2.03 d'Audacity sous  NVDA 2014.1 et 2014.2.
 
-
-+ Configuration à respecter +[hdr0]
+++ Configuration à respecter ++
 Pour un bon fonctionnement du module, il est nécessaire de :
-- conserver les raccourcis de positionnement du curseur audio et de sélection prédéfinis de base par Audacity
-- laisser   afficher Toutes les barres d'outils,   en particulier la barre d'outils Sélection.
-- Conserver le format  d'affichage du temps défini par défaut.
+
+- laisser affichées Toutes les barres d'outils, en particulier la barre d'outils Sélection Audacity.
+- Conserver le format  d'affichage du temps défini par défaut ou choisir  parmi un des formats indiqués au chapitre [Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity #HDR7]
 
 
 + Script d'annonce de la position audio +[hdr1]
@@ -72,7 +71,7 @@ Il annonce l'état  des boutons "Lecture" et "Pause".
 Si le bouton "lecture" n'est pas enfoncé, "lecture arrêtée" est annoncé.
 
 + Annonce automatique de la position audio +[hdr4]
-Les raccourcis suivants d'Audacity permettent de définir ou de déplacer le curseur audio:
+Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
 - "Maj + a": lecture / stop  et positionnement du curseur audio
 - "flèche gauche": petit saut à gauche,
 - "flèche droite": petit saut à droite,
@@ -85,41 +84,68 @@ Les raccourcis suivants d'Audacity permettent de définir ou de déplacer le cur
 - "espace": lecture /stop
 
 
-Après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé sous la forme:
+Après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
 - annonce du label du champ("position audio",
 - annonce du contenu du champ formaté pour ne pas dire les zéros.
 
+
 Le retour de la position audio en début de sélection est signalé.
+Ces raccourcis peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
 
 
 + Annonce automatique de la sélection +[hdr5]
-Les raccourcis suivants d'Audacity permettent de définir ou de déplacer le début et la fin de la sélection:
+Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le début et la fin de la sélection:
 - "Maj + début": sélection jusqu'au début,
 - "Maj + fin": sélection jusqu'à la fin,
 - "Maj + j": sélection du début de la piste jusqu'au curseur,
 - "Maj + k": sélection du curseur jusqu'à la fin de la piste
 - "Maj + flèche gauche": étendre la sélection à gauche , 
 - "Control + Maj + flèche droite": réduire la sélection àdroite 
-- Maj +flèche droite": étendre la sélection à droite,
+- Maj + flèche droite": étendre la sélection à droite,
 - "Control + Maj + flèche gauche": réduire la sélection à gauche
 
 
-Après l'activation du raccourci et suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé, sous la forme:
+Après l'activation du raccourci et si un changement a eu lieu, suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé sous la forme:
+
 - annonce du label du champ,
 - annonce de son contenu formaté pour ne pas dire les zéros.
-Le second champ de sélection indique, suivant le choix "durée" ou"fin", soit:
-- la durée de la sélection,
-- soit le temps à laquelle se trouve la fin de la sélection.
+
+
+Le second champ de sélection indique, suivant le choix "durée" ou"fin":
+- soit la durée de la sélection,
+- soit le temps auquel se trouve la fin de la sélection.
 
 
 Comme Tous les labels annoncés sont ceux qui sont affichés par Audacity, il peut y avoir des incohérences dues à la traduction  ou au codage (par exemple, sélection fin au lieu de fin de la sélection", "durée sélection" au lieu de "longueur de la sélection").
 
-
-
- 
+Ces raccourcis  peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
 
 
 + Appui sur un bouton avec la barre d'espace +[HDR6]
 Dans Audacity, la barre d'espace est prévue pour lancer ou arrêter la lecture audio, mais pas pour appuyer sur un bouton.
 Pour appuyer sur le bouton, il faut utiliser la touche "Entrée".
 Le module apporte cette possibilité sans empêcher le fonctionnement  dans toutes les autres situations.
+
++ Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity +[HDR7]
+
+La Barre d'outils Sélection Audacity  présente les zones d'édition suivantes:
+- début de la sélection,
+- durée ou fin de la sélection,
+- position audio.
+
+
+Ces zones contiennent un temps qui peut être modifier.
+Ce temps est inscrit suivant un format que l'on configure avec le menu contextuel.
+Pour modifier ce temps, il faut se placer sur le chiffre à modifier  (par flèche droite ou gauche)  et l'augmenter ou le diminuer avec les flèches haute ou bas.
+Ce module permet une meilleure vocalisation d'une part  en indiquant le temps en heure, minute et secondes et d'autre part, en   indiquant la nature du chiffre qui est modifié:
+
+-  les dizaines et les unités pour les heures, les minutes et les secondes,
+-  les dixièmes, centièmes et les  millièmes pour les secondes.
+
+
+Mais seules les format suivants sont pris en compte:
+
+- HH:MM:SS,
+- HH:MM:SS,centième
+- HH:MM:SS,millième
+
