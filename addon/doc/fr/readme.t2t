@@ -1,0 +1,125 @@
+﻿Module complémentaire pour Audacity - manuel utilisateur
+auteur: paul de la liste scriptnvda
+Dernière modification: %%date(%d/%m/%Y)
+
+%!Target: html
+%!Encoding: UTF-8
+%!Options: --toc
+% Remove the Table of Contents heading from the toc.
+%!PostProc(html): '^.*\<LI\>\<A HREF="#toc"\>.*\</A\>.*$' ''
+
+% h1 in html should really be the document title only.
+% Therefore, change h1 through h5 in the output to h2 through h6.
+%!PostProc(html): ^<H5>(.*)</H5>$ <H6>\1</H6>
+%!PostProc(html): ^<H4>(.*)</H4>$ <H5>\1</H5>
+%!PostProc(html): ^<H3>(.*)</H3>$ <H4>\1</H4>
+%!PostProc(html): ^<H2>(.*)</H2>$ <H3>\1</H3>
+%!PostProc(html): ^<H1>(.*)</H1>$ <H2>\1</H2>
+% key definition
+%!PostProc (html): KEY_AUDIO_POSITION Control+shift+t
+%!PostProc (html): KEY_SELECTION Control+shift+s
+%!PostProc (html): KEY_BUTTONS_STATE Control+Alt+f5
+
+= Sommaire =[toc]
+%%toc
+
++ Introduction +
+
+++ Fonctionnalités ++
+Ce module complémentaire  apporte:
+
+- [un script pour annoncer la position du curseur audio #HDR1],
+- [un script pour annoncer le début et fin de sélection #HDR2], 
+- [un script pour connaitre l'état des boutons "Lecture" et "Pause" #HDR3],
+- [l'annonce automatique de la position audio #HDR4],
+- [l'annonce automatique de la sélection #HDR5],
+- [l'utilisation possible de la barre d'espace pour appuyer sur un bouton #HDR6].
+
+
+++ Compatibilité ++
+Ce module a été testé avec la version 2.0.3 d'Audacity.
+Ce module n'est pas compatible avec les versions de NVDA inférieures à la version 2013.3 dont il utilise la nouvelle possibilité de rangement des scripts par catégorie.
+
+
++ Configuration à respecter +[hdr0]
+Pour un bon fonctionnement du module, il est nécessaire de :
+- conserver les raccourcis de positionnement du curseur audio et de sélection prédéfinis de base par Audacity
+- laisser   afficher Toutes les barres d'outils,   en particulier la barre d'outils Sélection.
+- Conserver le format  d'affichage du temps défini par défaut.
+
+
++ Script d'annonce de la position audio +[hdr1]
+Pour utiliser ce script, il faut que le focus soit dans la vue de piste.
+Ce script se lance par la commande clavier "KEY_AUDIO_POSITION".
+Il annonce  le temps indiqué dans le champ "position audio" de la barre d'outils  "Sélection".
+
+
++ Script d'annonce de la sélection +[hdr2]
+Pour utiliser ce script, il faut que le focus soit dans la vue de piste.
+Ce script se lance par la commande clavier "KEY_SELECTION.
+Il annonce le temps indiqué dans les champs suivants de la barre d'outils "Sélection": 
+- champ "Début de sélection",
+- champ "fin de sélection" si le choix "fin" est sélectionné,
+- champ "Longueur de la sélection" si le choix "durée" est sélectionné.
+
+
+Si les deux temps sont nuls, "aucunne sélection" n'est annoncée.
+
++ Script d'annonce de l'état des boutons Pause et Lecture +[hdr3]
+Pour utiliser ce script, il faut que le focus se trouve dans la vue de piste.
+Il se lance par la commande clavier KEY_BUTTONS_STATE
+Il annonce l'état  des boutons "Lecture" et "Pause".
+Si le bouton "lecture" n'est pas enfoncé, "lecture arrêtée" est annoncé.
+
++ Annonce automatique de la position audio +[hdr4]
+Les raccourcis suivants d'Audacity permettent de définir ou de déplacer le curseur audio:
+- "Maj + a": lecture / stop  et positionnement du curseur audio
+- "flèche gauche": petit saut à gauche,
+- "flèche droite": petit saut à droite,
+- "début": saut au début,
+- "fin": saut à la fin,
+- ",": petit saut à gauche,
+- ".": petit saut à droite,
+- "Maj + ,": grand saut à gauche,
+- "Maj + .": grand saut à droite,
+- "espace": lecture /stop
+
+
+Après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé sous la forme:
+- annonce du label du champ("position audio",
+- annonce du contenu du champ formaté pour ne pas dire les zéros.
+
+Le retour de la position audio en début de sélection est signalé.
+
+
++ Annonce automatique de la sélection +[hdr5]
+Les raccourcis suivants d'Audacity permettent de définir ou de déplacer le début et la fin de la sélection:
+- "Maj + début": sélection jusqu'au début,
+- "Maj + fin": sélection jusqu'à la fin,
+- "Maj + j": sélection du début de la piste jusqu'au curseur,
+- "Maj + k": sélection du curseur jusqu'à la fin de la piste
+- "Maj + flèche gauche": étendre la sélection à gauche , 
+- "Control + Maj + flèche droite": réduire la sélection àdroite 
+- Maj +flèche droite": étendre la sélection à droite,
+- "Control + Maj + flèche gauche": réduire la sélection à gauche
+
+
+Après l'activation du raccourci et suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé, sous la forme:
+- annonce du label du champ,
+- annonce de son contenu formaté pour ne pas dire les zéros.
+Le second champ de sélection indique, suivant le choix "durée" ou"fin", soit:
+- la durée de la sélection,
+- soit le temps à laquelle se trouve la fin de la sélection.
+
+
+Comme Tous les labels annoncés sont ceux qui sont affichés par Audacity, il peut y avoir des incohérences dues à la traduction  ou au codage (par exemple, sélection fin au lieu de fin de la sélection", "durée sélection" au lieu de "longueur de la sélection").
+
+
+
+ 
+
+
++ Appui sur un bouton avec la barre d'espace +[HDR6]
+Dans Audacity, la barre d'espace est prévue pour lancer ou arrêter la lecture audio, mais pas pour appuyer sur un bouton.
+Pour appuyer sur le bouton, il faut utiliser la touche "Entrée".
+Le module apporte cette possibilité sans empêcher le fonctionnement  dans toutes les autres situations.
