@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Visu2ScriptAppModule\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-13 15:02+0100\n"
-"PO-Revision-Date: 2014-05-13 15:02+0100\n"
+"PO-Revision-Date: 2015-05-26 10:50+0100\n"
 "Last-Translator: Paul ( french scriptNVDA list)\n"
 "Language-Team: paul from scriptNVDA\n"
 "Language: fr_FR\n"
@@ -87,15 +87,15 @@ msgstr "millième"
 
 #: audacity.py:322
 msgid "report audio position"
-msgstr "Annonce la position du curseur audio"
+msgstr "Annoncer la position du curseur audio"
 
 #: audacity.py:327
 msgid "report start and end of selection"
-msgstr "Annonce le début et la fin de la sélection"
+msgstr "Annoncer le début et la fin de la sélection"
 
 #: audacity.py:332
 msgid "report the state of Pause and Play buttons"
-msgstr "Annonce l'état des boutons \"lecture\" et \"Pause\""
+msgstr "Annoncer l'état des boutons \"lecture\" et \"Pause\""
 
 #: objects.py:99
 msgid "Selection tool bar"

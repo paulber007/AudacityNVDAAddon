@@ -1,10 +1,11 @@
 Module complémentaire pour Audacity - manuel utilisateur
-auteur: paul de la liste scriptnvda
+auteur: paulber19 (paulber19@laposte.net)
 Dernière modification: %%date(%d/%m/%Y)
 
 %!Target: html
 %!Encoding: UTF-8
 %!Options: --toc
+%!style:..\style.css
 % Remove the Table of Contents heading from the toc.
 %!PostProc(html): '^.*\<LI\>\<A HREF="#toc"\>.*\</A\>.*$' ''
 
@@ -38,8 +39,7 @@ Ce module complémentaire  apporte:
 
 
 ++ Compatibilité ++
-Ce module a été testé avec la version 2.03, 2.05 et 2.06  d'Audacity sous  NVDA 2014.3.
-Il n'est pas compatible avec les versions deNVDA antérieures à la version 2014.3.
+Ce module a été testé avec les versions 2.03, 2.05, 2.06 et 2.1.0  d'Audacity sous  NVDA 2015.1  et 2015.2 .
 
 
 ++ Configuration à respecter ++

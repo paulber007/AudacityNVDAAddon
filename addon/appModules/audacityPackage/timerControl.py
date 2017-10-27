@@ -1,3 +1,5 @@
+import addonHandler
+addonHandler.initTranslation()
 import controlTypes
 import gui
 import wx
@@ -6,12 +8,12 @@ import api
 from NVDAObjects.window import Window
 from NVDAObjects.IAccessible import IAccessible
 import time
-import addonHandler
 from ou_time import *
 import objects
 from  objects import isPressed
+import queueHandler
 
-addonHandler.initTranslation()
+
 
 
 
@@ -21,13 +23,16 @@ addonHandler.initTranslation()
 	
 
 
-
+def sayMessage(msg):
+	api.processPendingEvents()
+	ui.message(msg)
+	
+	
 class TimerControl(object):
 	def __init__(self, obj, ):
-		#super(TimerControl, self).__init__( *args, **kwargs)
 		self.obj = obj
 		self.name = obj.name
-		pass
+
 
 	
 	def getLabelAndTime(self):
@@ -114,9 +119,9 @@ class AudioTimerControl(TimerControl):
 			# not selection  or selection at start of track
 			if isNullDuration(sAudioPositionTime):
 				# audio at track start
-				ui.message( _("Audio position at start of track"))
+				sayMessage( _("Audio position at start of track"))
 			else:
-				ui.message(sAudioPositionLabel)
+				sayMessage(sAudioPositionLabel)
 				sayTime(sAudioPositionTime)
 	
 	
@@ -133,7 +138,8 @@ class AudioTimerControl(TimerControl):
 			if (sAudioPositionTime == sSelectionStartTime
 				or isNullDuration(sAudioPositionTime)):
 				# start of audio position  at start of selection
-				ui.message(_("Audio position at selection's start"))
+				api.processPendingEvents()
+				sayMessage(_("Audio position at selection's start"))
 				sayTime(sSelectionStartTime)
 				return True
 		return False
@@ -181,14 +187,14 @@ class SelectionTimers(object):
 		if self.sayIfNoSelection(selectionStartTime, selectionEndTime):
 			return
 			
-		ui.message(selectionStartLabel)
+		sayMessage(selectionStartLabel)
 		sayTime(selectionStartTime)
-		ui.message(selectionEndLabel)
+		sayMessage(selectionEndLabel)
 		sayTime(selectionEndTime)
 			
 	def sayIfNoSelection(self, selectionStartTime, selectionEndTime):
 		if (selectionStartTime == selectionEndTime) and isNullDuration(selectionStartTime):
-			ui.message(_("no selection"))
+			sayMessage(_("no selection"))
 			return True
 		return False
 				
@@ -202,7 +208,7 @@ class SelectionTimers(object):
 			return
 			
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
-		ui.message (selectionStartLabel)
+		sayMessage (selectionStartLabel)
 		sayTime(selectionStartTime)
 		
 	
@@ -216,6 +222,6 @@ class SelectionTimers(object):
 		
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
 		
-		ui.message(selectionEndLabel)
+		sayMessage(selectionEndLabel)
 		sayTime(selectionEndTime)
 	

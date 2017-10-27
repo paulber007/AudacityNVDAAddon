@@ -1,5 +1,6 @@
 #appModules/audacity.py
-
+import addonHandler
+addonHandler.initTranslation()
 import appModuleHandler
 import winUser
 import controlTypes
@@ -11,14 +12,14 @@ import api
 from NVDAObjects.window import Window
 from NVDAObjects.IAccessible import IAccessible
 import time
-from  objects import isPressed, inTracksPanelView
-import timerControl
-import ou_time
-import addonHandler
+from  audacityPackage.objects import isPressed, inTracksPanelView
+import audacityPackage.timerControl
+import audacityPackage.ou_time
 
 
 
-addonHandler.initTranslation()
+
+
 
 
 # timer to monitor audio and selection changes
@@ -74,14 +75,14 @@ def monitorAudioAndSelectionChanges():
 	
 	
 	# audio
-	audioTimer = timerControl.AudioTimerControl()
+	audioTimer = audacityPackage.timerControl.AudioTimerControl()
 	newAudioPosition = audioTimer.getAudioPosition()
 	if newAudioPosition != GB_audioPosition :
 		audioTimer.sayAudioPosition()
 
 	GB_audioPosition = newAudioPosition
 	# selection
-	selectionTimer = timerControl.SelectionTimers()
+	selectionTimer = audacityPackage.timerControl.SelectionTimers()
 	newSelection = selectionTimer.getSelection()
 	if GB_selection == None:
 		GB_selection = newSelection
@@ -110,10 +111,10 @@ def monitorAudioAndSelectionChanges():
 
 class TimerControlEdit(IAccessible):
 	def event_gainFocus(self):
-		timer = timerControl.TimerControl(self)
+		timer = audacityPackage.timerControl.TimerControl(self)
 		(sLabel, sTime) = timer.getLabelAndTime()
 		ui.message(sLabel)
-		ou_time.sayTime(sTime)
+		audacityPackage.ou_time.sayTime(sTime)
 
 
 	def check(cls, obj= None):
@@ -125,7 +126,7 @@ class TimerControlEdit(IAccessible):
 		if (obj.role != controlTypes.ROLE_STATICTEXT or obj.childCount <6):
 			return False
 			
-		timer = timerControl.TimerControl(obj)
+		timer = audacityPackage.timerControl.TimerControl(obj)
 		return timer.check()
 
 		
@@ -293,14 +294,14 @@ class AppModule(appModuleHandler.AppModule):
 
 
 	def script_reportAudioPosition (self, gesture):
-		timer = timerControl.AudioTimerControl()
+		timer = audacityPackage.timerControl.AudioTimerControl()
 		timer.sayAudioPosition()
 
 	script_reportAudioPosition.__doc__ = _("report audio position")
 	script_reportAudioPosition.category = _scriptCategory
 
 	def script_reportSelection (self, gesture):		
-		timer = timerControl.SelectionTimers()
+		timer = audacityPackage.timerControl.SelectionTimers()
 		timer.saySelection()
 	script_reportSelection.__doc__ = _("report start and end of selection")
 	script_reportSelection.category = _scriptCategory

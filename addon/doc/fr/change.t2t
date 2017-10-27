@@ -1,10 +1,11 @@
 Module complémentaire Audacity - Historique
-auteur: Paul de la liste scriptnvda
+auteur: Paulber19 (paulber19@laposte.net)
 Dernière modification: %%date(%d/%m/%Y)
 
 %!Target: html
 %!Encoding: UTF-8
 %!Options: --toc --toc-level=1
+%!style:..\style.css
 % Remove the Table of Contents heading from the toc.
 %!PostProc(html): '^.*\<LI\>\<A HREF="#toc"\>.*\</A\>.*$' ''
 % h1 in html should really be the document title only.
@@ -20,6 +21,11 @@ Dernière modification: %%date(%d/%m/%Y)
 %%toc
 
 
+
+
+
++ v2.2 (11 Juin 2015) +
+- restructuration du code
 
 
 + v2.1 (7 Octobre 2014) +
