@@ -5,8 +5,8 @@
 *	Download [stable version][1]
 
 This add-on adds extra functionality when working with Audacity
-- a script "control+shift+t" to report audio position,
-- a script "control+shift+s" to report start and end of selection,
+* a script "control+shift+t" to report audio position,
+* a script "control+shift+s" to report start and end of selection,
 * automatic report of audio/selection position on events (for exemple, set of selection or audio moving),
 * automatic audio position report ,
 * automatic start/end selection report,
