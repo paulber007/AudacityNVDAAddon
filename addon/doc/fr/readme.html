@@ -9,7 +9,7 @@
 <P ALIGN="center"><CENTER><H1>Module complémentaire pour Audacity - manuel utilisateur</H1>
 <FONT SIZE="4">
 <I>auteur: paulber19 (paulber19@laposte.net)</I><BR>
-Dernière modification: 12/06/2015
+Dernière modification: 03/08/2017
 </FONT></CENTER>
 
 <A NAME="toc"></A>
@@ -29,6 +29,14 @@ Dernière modification: 12/06/2015
   <LI><A HREF="#hdr5">6. Annonce automatique de la sélection</A>
   <LI><A HREF="#HDR6">7. Appui sur un bouton avec la barre d'espace</A>
   <LI><A HREF="#HDR7">8. Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity</A>
+  <LI><A HREF="#toc13">9. Historique</A>
+    <UL>
+    <LI><A HREF="#toc14">9.1. v2.3 (3 Août 2017)</A>
+    <LI><A HREF="#toc15">9.2. v2.2 (11 Juin 2015)</A>
+    <LI><A HREF="#toc16">9.3. v2.1 (7 Octobre 2014)</A>
+    <LI><A HREF="#toc17">9.4. v2.0 (8 mai 2014)</A>
+    <LI><A HREF="#toc18">9.5. v1.0 (24 janvier 2014)</A>
+    </UL>
   </UL>
 
 <P></P>
@@ -52,7 +60,7 @@ Ce module complémentaire  apporte:
 <A NAME="toc4"></A>
 <H3>1.2. Compatibilité</H3>
 <P>
-Ce module a été testé avec les versions 2.03, 2.05, 2.06 et 2.1.0  d'Audacity sous  NVDA 2015.1  et 2015.2 .
+Ce module a été testé, avec NVDA 2017.2 et   la version 2.1.3 d'audacity. Il reste en principe compatible avec les versions 2.03, 2.05 et  2.06  d'Audacity.
 </P>
 <A NAME="toc5"></A>
 <H3>1.3. Configuration à respecter</H3>
@@ -85,7 +93,7 @@ Il annonce le temps indiqué dans les champs suivants de la barre d'outils "Sél
 </UL>
 
 <P>
-Si les deux temps sont nuls, "aucunne sélection" n'est annoncée.
+Si les deux temps sont nuls, "aucune sélection" est annoncée.
 </P>
 <A NAME="hdr3"></A>
 <H2>4. Script d'annonce de l'état des boutons Pause et Lecture</H2>
@@ -98,23 +106,23 @@ Si le bouton "lecture" n'est pas enfoncé, "lecture arrêtée" est annoncé.
 <A NAME="hdr4"></A>
 <H2>5. Annonce automatique de la position audio</H2>
 <P>
-Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
+En lecture audio ou non, les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
 </P>
 <UL>
-<LI>"Maj + a": lecture / stop  et positionnement du curseur audio
+<LI>"Majuscule + a"ou "x": lecture / stop  et positionnement du curseur audio
 <LI>"flèche gauche": petit saut à gauche,
 <LI>"flèche droite": petit saut à droite,
 <LI>"début": saut au début,
 <LI>"fin": saut à la fin,
 <LI>",": petit saut à gauche,
 <LI>".": petit saut à droite,
-<LI>"Maj + ,": grand saut à gauche,
-<LI>"Maj + .": grand saut à droite,
+<LI>"Majuscule + ,": grand saut à gauche,
+<LI>"Majuscule + .": grand saut à droite,
 <LI>"espace": lecture /stop
 </UL>
 
 <P>
-Après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
+En lecture audio arrêtée et après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
 </P>
 <UL>
 <LI>annonce du label du champ("position audio",
@@ -131,18 +139,18 @@ Ces raccourcis peuvent être modifiés par l'utilisateur sans impacter ce foncti
 Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le début et la fin de la sélection:
 </P>
 <UL>
-<LI>"Maj + début": sélection jusqu'au début,
-<LI>"Maj + fin": sélection jusqu'à la fin,
-<LI>"Maj + j": sélection du début de la piste jusqu'au curseur,
-<LI>"Maj + k": sélection du curseur jusqu'à la fin de la piste
-<LI>"Maj + flèche gauche": étendre la sélection à gauche , 
-<LI>"Control + Maj + flèche droite": réduire la sélection àdroite 
-<LI>Maj + flèche droite": étendre la sélection à droite,
-<LI>"Control + Maj + flèche gauche": réduire la sélection à gauche
+<LI>"Majuscule + début": sélection jusqu'au début,
+<LI>"Majuscule + fin": sélection jusqu'à la fin,
+<LI>"Majuscule + j": sélection du début de la piste jusqu'au curseur,
+<LI>"Majuscule + k": sélection du curseur jusqu'à la fin de la piste
+<LI>"Majuscule + flèche gauche": étendre la sélection à gauche , 
+<LI>"Control + Majuscule + flèche droite": réduire la sélection à droite 
+<LI>Majuscule + flèche droite": étendre la sélection à droite,
+<LI>"Control + Majuscule + flèche gauche": réduire la sélection à gauche
 </UL>
 
 <P>
-Après l'activation du raccourci et si un changement a eu lieu, suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé sous la forme:
+En lecture arrêtée et après l'activation du raccourci et si un changement a eu lieu, suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé sous la forme:
 </P>
 <UL>
 <LI>annonce du label du champ,
@@ -163,12 +171,16 @@ Comme Tous les labels annoncés sont ceux qui sont affichés par Audacity, il pe
 <P>
 Ces raccourcis  peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
 </P>
+<P>
+La commande clavier propre au module "alt+control+f4" permet d'activer ou désactiver cette annonce des changements de sélection quand celle-ci devient gênante.
+</P>
 <A NAME="HDR6"></A>
 <H2>7. Appui sur un bouton avec la barre d'espace</H2>
 <P>
 Dans Audacity, la barre d'espace est prévue pour lancer ou arrêter la lecture audio, mais pas pour appuyer sur un bouton.
-Pour appuyer sur le bouton, il faut utiliser la touche "Entrée".
-Le module apporte cette possibilité sans empêcher le fonctionnement  dans toutes les autres situations.
+Pour appuyer sur le bouton, il faut utiliser la touche "Entrée" mais cela déplace le focus sur l'élément suivant de la fenêtre.
+Le module permet l'utilisation de la barre d'espace pour appuyer sur un bouton.
+Mais dans ce cas, la lecture audio ne peut plus être lancer tant que le focus est sur un bouton autre que "Lecture" ou "Pause".
 </P>
 <A NAME="HDR7"></A>
 <H2>8. Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity</H2>
@@ -198,9 +210,42 @@ Mais seules les format suivants sont pris en compte:
 <LI>HH:MM:SS,
 <LI>HH:MM:SS,centième
 <LI>HH:MM:SS,millième
-<P></P>
 </UL>
 
+<A NAME="toc13"></A>
+<H2>9. Historique</H2>
+<A NAME="toc14"></A>
+<H3>9.1. v2.3 (3 Août 2017)</H3>
+<UL>
+<LI>script "alt+control+f4" pour activer ou désactiver l'annonce des changements de sélection,
+<LI>compatibilité avec audacity v2.1.3,
+<LI>reprise du code.
+</UL>
+
+<A NAME="toc15"></A>
+<H3>9.2. v2.2 (11 Juin 2015)</H3>
+<UL>
+<LI>restructuration du code
+</UL>
+
+<A NAME="toc16"></A>
+<H3>9.3. v2.1 (7 Octobre 2014)</H3>
+<UL>
+<LI>compatibilité avec NVDA 2014.3
+<LI>compatibilité avec Audacity v2.06
+</UL>
+
+<A NAME="toc17"></A>
+<H3>9.4. v2.0 (8 mai 2014)</H3>
+<UL>
+<LI>mise en place d'une surveillance des champ position et sélection pour annoncer les changements.
+</UL>
+
+<A NAME="toc18"></A>
+<H3>9.5. v1.0 (24 janvier 2014)</H3>
+<P>
+Création du module complémentaire 
+</P>
 
 <!-- html code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
 <!-- cmdline: txt2tags .\doc\fr\readme.t2t -->

@@ -1,3 +1,6 @@
+#audacity/audacityPackage/ou_time.py
+#Copyright (C) 2015-2017 Paulber19
+#This file is covered by the GNU General Public License.
 import ui
 import addonHandler
 addonHandler.initTranslation()
@@ -11,9 +14,8 @@ def formatTime (sTime):
 	sTemp = sTemp.replace("s", "")
 	sTemp = sTemp.replace(" ", "")
 	return sTemp
-from time import sleep
-def sayTime (sTime):
 
+def getTimeMessage (sTime):
 	iNotNull = False
 	lTime = sTime.split(":")
 	if len(lTime) == 3:
@@ -23,7 +25,6 @@ def sayTime (sTime):
 		if  len(temp ) == 2:
 			iSeconds= int(temp[0])
 			iMSeconds= int(temp[1])
-
 		else:
 			iSeconds = int(temp[0])
 			iMSeconds= 0
@@ -45,45 +46,41 @@ def sayTime (sTime):
 		else:
 			iSeconds = int(sTime)
 			iMSeconds= 0
-
-	#ready to say
+	
+	textList = []
 	if iHours :
 		iNoNull = True
 		if iHours == 1 :
-			ui.message(_("one hour"))
+			textList.append(_("one hour"))
 		else:
-			ui.message(_("%s hours") %iHours)
+			textList.append( _("%s hours") %iHours)
 
 
 	if  iMinutes :
 		iNotNull = True
 		if iMinutes == 1 :
-			ui.message(_("1 minute"))
+			textList.append(_("1 minute"))
 		else:
-			ui.message(_("%s minutes")%iMinutes)
-
-
+			textList.append(_("%s minutes")%iMinutes)
 	if iMSeconds :
 		iNotNull = True
 		if iSeconds :
 			if iSeconds == 1 :
-				ui.message(_("1 second {0}") .format(iMSeconds))
+				textList.append(_("1 second {0}") .format(iMSeconds))
 			else:
-				ui.message(_("{0} seconds {1}") .format(iSeconds, iMSeconds))
-
+				textList.append(_("{0} seconds {1}") .format(iSeconds, iMSeconds))
+		
 		else:
-			ui.message(_("0 second %s") % iMSeconds)
-
+			textList.append(_("0 second %s") % iMSeconds)
+	
 	else:
 		if iSeconds :
 			iNotNull = True
-			ui.message(_("%s second") %iSeconds)
-
+			textList.append(_("%s second") %iSeconds)
+	
 	if not iNotNull:
-		ui.message(_("0 second"))
-
-	sleep(0.5)
-
+		textList.append(_("0 second"))
+	return " ".join(textList)
 
 
 def isNullDuration(sDuration):
@@ -96,8 +93,7 @@ def isNullDuration(sDuration):
 	else:
 			last ="0"
 			sTemp = lTemp[0]
-		
-
+	
 	if (int(sTemp)
 		or int(last)):
 		return False

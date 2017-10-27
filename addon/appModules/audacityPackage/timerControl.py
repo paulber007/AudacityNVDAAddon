@@ -1,5 +1,9 @@
+#audacity/audacityPackage/timerControl.py
+#Copyright (C) 2015-2017 Paulber19
+#This file is covered by the GNU General Public License.
 import addonHandler
 addonHandler.initTranslation()
+from logHandler import log
 import controlTypes
 import gui
 import wx
@@ -11,7 +15,6 @@ import time
 from ou_time import *
 import objects
 from  objects import isPressed
-import queueHandler
 
 
 
@@ -29,15 +32,16 @@ def sayMessage(msg):
 	
 	
 class TimerControl(object):
-	def __init__(self, obj, ):
-		self.obj = obj
-		self.name = obj.name
-
-
+	def __init__(self, obj = None):
+		if obj is not None:
+			self.obj = obj
+		self.name = self.obj.name
 	
 	def getLabelAndTime(self):
+		if self.obj is None:
+			return("", None)
 		timerControlName = self.name
-		if len(timerControlName) < 18:
+		if not timerControlName or len(timerControlName) < 18:
 			return  (timerControlName, None)
 
 		if "+" in timerControlName:
@@ -45,7 +49,6 @@ class TimerControl(object):
 			timerControlName= timerControlName.split("+")[0]
 			
 		sTemp = timerControlName
-		
 		sTemp = sTemp.replace(" ", "")
 		sTemp = sTemp.split(".")
 		if len(sTemp) == 1:
@@ -64,6 +67,8 @@ class TimerControl(object):
 
 
 	def check(self):
+		if self.obj is None:
+			return False
 		(sLabel, sTime) = self.getLabelAndTime()
 		if sTime == None:
 			return False
@@ -84,53 +89,44 @@ class TimerControl(object):
 
 class AudioTimerControl(TimerControl):
 	def __init__(self):
-		obj = objects.objectAudioPosition()
-		if not obj:
+		self.obj = objects.audioPositionObject()
+		if self.obj is None:
 			# error
-			print "error, not audioPositionObject"
-			return
-			
-		super(AudioTimerControl, self).__init__(obj)
-
-
+			log.warning("error, not audioPositionObject")
+		super(AudioTimerControl, self).__init__()
 
 	def getAudioPosition(self):
 		return self.getLabelAndTime()
 	
-
-	
-	def sayAudioPosition(self):
+	def getAudioPositionMessage(self):
+		if self.obj is None:
+			return None
 		sAudioPosition = self.getLabelAndTime()
 		if   sAudioPosition == None :
 			#error
-			return
-	
-			
+			return None
 		(sAudioPositionLabel,sAudioPositionTime) = sAudioPosition
 		selection = SelectionTimers().getSelection()
 		if selection == None:
-			return
-
+			return None
+		
 		((sSelectionStartLabel, sSelectionStartTime),(sSelectionEndLabel, sSelectionEndTime), idurationChoice) = selection
-		if not isNullDuration(sSelectionStartTime)and self.sayIfAudioAtStartOfSelection(sAudioPosition, selection):
+		msg = self.getIfAudioAtStartOfSelectionMessage(sAudioPosition, selection)
+		if not isNullDuration(sSelectionStartTime)and msg is not None:
 			pass
-	
 		else:
 			# not selection  or selection at start of track
 			if isNullDuration(sAudioPositionTime):
 				# audio at track start
-				sayMessage( _("Audio position at start of track"))
+				msg =_("Audio position at start of track")
 			else:
-				sayMessage(sAudioPositionLabel)
-				sayTime(sAudioPositionTime)
+				msg = sAudioPositionLabel
+				msg = "%s %s"%(msg, getTimeMessage(sAudioPositionTime))
+		return msg
+		return None
 	
-	
-	
-	
-	
-	
-
-	def sayIfAudioAtStartOfSelection(self, sAudioPosition, selection):
+	def getIfAudioAtStartOfSelectionMessage(self, sAudioPosition, selection):
+		msg = None
 		(sAudioPositionLabel, sAudioPositionTime) = sAudioPosition
 		((sSelectionStartLabel, sSelectionStartTime),(sSelectionEndLabel, sSelectionEndTime), idurationChoice) = selection
 		if not isNullDuration(sSelectionStartTime):
@@ -138,16 +134,16 @@ class AudioTimerControl(TimerControl):
 			if (sAudioPositionTime == sSelectionStartTime
 				or isNullDuration(sAudioPositionTime)):
 				# start of audio position  at start of selection
-				api.processPendingEvents()
-				sayMessage(_("Audio position at selection's start"))
-				sayTime(sSelectionStartTime)
-				return True
-		return False
+				msg="%s %s" %(_("Audio position at selection's start"), getTimeMessage(sSelectionStartTime))
+		return msg
 
 class SelectionStartTimerControl(TimerControl):
 	def __init__(self):
-		obj = objects.objectSelectionStart()
-		super(SelectionStartTimerControl, self).__init__(obj)
+		self.obj = objects.selectionStartObject()
+		if self.obj is None:
+			log.error ("no selectionStart object")
+			return
+		super(SelectionStartTimerControl, self).__init__()
 
 	def getSelection(self):
 		return  self.getLabelAndTime()
@@ -155,8 +151,12 @@ class SelectionStartTimerControl(TimerControl):
 		
 class SelectionEndTimerControl(TimerControl):
 	def __init__(self):
-		obj = objects.objectSelectionEnd()
-		super(SelectionEndTimerControl, self).__init__(obj)
+		self.obj = objects.selectionEndObject()
+		if self.obj is None:
+			log.error("no selectionEnd object")
+			return
+		super(SelectionEndTimerControl, self).__init__()
+	
 	def getSelection(self):
 		return  self.getLabelAndTime()
 
@@ -173,24 +173,24 @@ class SelectionTimers(object):
 		selectionStart = self.selectionStart.getLabelAndTime()
 		selectionEnd = self.selectionEnd.getLabelAndTime()
 		return (selectionStart, selectionEnd, self.iDurationChoice)
-
-	def saySelection(self, selection = None):
+	
+	def getSelectionMessage(self, selection = None):
 		if selection == None:
 			selection = self.getSelection()
-
-
-			
+		
 		if selection == None:
-			return 
+			return  None
 		# say start and end of selection
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
 		if self.sayIfNoSelection(selectionStartTime, selectionEndTime):
-			return
-			
-		sayMessage(selectionStartLabel)
-		sayTime(selectionStartTime)
-		sayMessage(selectionEndLabel)
-		sayTime(selectionEndTime)
+			return None
+		textList = []
+		textList.append(selectionStartLabel)
+		textList.append(getTimeMessage(selectionStartTime))
+		textList.append(selectionEndLabel)
+		textList.append(getTimeMessage(selectionEndTime))
+		return " ".join(textList)
+
 			
 	def sayIfNoSelection(self, selectionStartTime, selectionEndTime):
 		if (selectionStartTime == selectionEndTime) and isNullDuration(selectionStartTime):
@@ -198,30 +198,31 @@ class SelectionTimers(object):
 			return True
 		return False
 				
+			
+	def getIfNoSelectionMessage(self, selectionStartTime, selectionEndTime):
+		if (selectionStartTime == selectionEndTime) and isNullDuration(selectionStartTime):
+			return _("no selection")
+		return None
 	
-	def saySelectionStart(self, selection = None):
+	def getSelectionStartMessage(self, selection = None):
 		if selection == None:
 			selection= self.getSelection()
-
-				
-		if selection == None:
-			return
-			
-		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
-		sayMessage (selectionStartLabel)
-		sayTime(selectionStartTime)
 		
-	
-	
-	
-	def saySelectionEnd(self, selection = None):
+		if selection == None:
+			return None
+		
+		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
+		textList = []
+		#sayMessage (selectionStartLabel)
+		textList.append(selectionStartLabel)
+		textList.append(getTimeMessage(selectionStartTime))
+		return " ".join(textList)
+		
+	def getSelectionEndMessage(self, selection = None):
 		if selection == None:
 			selection = getSelection()
 		if selection == None:
-			return
+			return None
 		
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), durationChoice) = selection
-		
-		sayMessage(selectionEndLabel)
-		sayTime(selectionEndTime)
-	
+		return "%s %s" %(selectionEndLabel, getTimeMessage(selectionEndTime))

@@ -39,7 +39,7 @@ Ce module complémentaire  apporte:
 
 
 ++ Compatibilité ++
-Ce module a été testé avec les versions 2.03, 2.05, 2.06 et 2.1.0  d'Audacity sous  NVDA 2015.1  et 2015.2 .
+Ce module a été testé, avec NVDA 2017.2 et   la version 2.1.3 d'audacity. Il reste en principe compatible avec les versions 2.03, 2.05 et  2.06  d'Audacity.
 
 
 ++ Configuration à respecter ++
@@ -64,7 +64,7 @@ Il annonce le temps indiqué dans les champs suivants de la barre d'outils "Sél
 - champ "Longueur de la sélection" si le choix "durée" est sélectionné.
 
 
-Si les deux temps sont nuls, "aucunne sélection" n'est annoncée.
+Si les deux temps sont nuls, "aucune sélection" est annoncée.
 
 + Script d'annonce de l'état des boutons Pause et Lecture +[hdr3]
 Pour utiliser ce script, il faut que le focus se trouve dans la vue de piste.
@@ -73,20 +73,20 @@ Il annonce l'état  des boutons "Lecture" et "Pause".
 Si le bouton "lecture" n'est pas enfoncé, "lecture arrêtée" est annoncé.
 
 + Annonce automatique de la position audio +[hdr4]
-Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
-- "Maj + a": lecture / stop  et positionnement du curseur audio
+En lecture audio ou non, les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
+- "Majuscule + a"ou "x": lecture / stop  et positionnement du curseur audio
 - "flèche gauche": petit saut à gauche,
 - "flèche droite": petit saut à droite,
 - "début": saut au début,
 - "fin": saut à la fin,
 - ",": petit saut à gauche,
 - ".": petit saut à droite,
-- "Maj + ,": grand saut à gauche,
-- "Maj + .": grand saut à droite,
+- "Majuscule + ,": grand saut à gauche,
+- "Majuscule + .": grand saut à droite,
 - "espace": lecture /stop
 
 
-Après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
+En lecture audio arrêtée et après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
 - annonce du label du champ("position audio",
 - annonce du contenu du champ formaté pour ne pas dire les zéros.
 
@@ -97,17 +97,17 @@ Ces raccourcis peuvent être modifiés par l'utilisateur sans impacter ce foncti
 
 + Annonce automatique de la sélection +[hdr5]
 Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le début et la fin de la sélection:
-- "Maj + début": sélection jusqu'au début,
-- "Maj + fin": sélection jusqu'à la fin,
-- "Maj + j": sélection du début de la piste jusqu'au curseur,
-- "Maj + k": sélection du curseur jusqu'à la fin de la piste
-- "Maj + flèche gauche": étendre la sélection à gauche , 
-- "Control + Maj + flèche droite": réduire la sélection àdroite 
-- Maj + flèche droite": étendre la sélection à droite,
-- "Control + Maj + flèche gauche": réduire la sélection à gauche
+- "Majuscule + début": sélection jusqu'au début,
+- "Majuscule + fin": sélection jusqu'à la fin,
+- "Majuscule + j": sélection du début de la piste jusqu'au curseur,
+- "Majuscule + k": sélection du curseur jusqu'à la fin de la piste
+- "Majuscule + flèche gauche": étendre la sélection à gauche , 
+- "Control + Majuscule + flèche droite": réduire la sélection à droite 
+- Majuscule + flèche droite": étendre la sélection à droite,
+- "Control + Majuscule + flèche gauche": réduire la sélection à gauche
 
 
-Après l'activation du raccourci et si un changement a eu lieu, suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé sous la forme:
+En lecture arrêtée et après l'activation du raccourci et si un changement a eu lieu, suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" est annoncé sous la forme:
 
 - annonce du label du champ,
 - annonce de son contenu formaté pour ne pas dire les zéros.
@@ -122,11 +122,14 @@ Comme Tous les labels annoncés sont ceux qui sont affichés par Audacity, il pe
 
 Ces raccourcis  peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
 
+La commande clavier propre au module "alt+control+f4" permet d'activer ou désactiver cette annonce des changements de sélection quand celle-ci devient gênante.
 
 + Appui sur un bouton avec la barre d'espace +[HDR6]
 Dans Audacity, la barre d'espace est prévue pour lancer ou arrêter la lecture audio, mais pas pour appuyer sur un bouton.
-Pour appuyer sur le bouton, il faut utiliser la touche "Entrée".
-Le module apporte cette possibilité sans empêcher le fonctionnement  dans toutes les autres situations.
+Pour appuyer sur le bouton, il faut utiliser la touche "Entrée" mais cela déplace le focus sur l'élément suivant de la fenêtre.
+Le module permet l'utilisation de la barre d'espace pour appuyer sur un bouton.
+Mais dans ce cas, la lecture audio ne peut plus être lancer tant que le focus est sur un bouton autre que "Lecture" ou "Pause".
+
 
 + Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity +[HDR7]
 
@@ -151,3 +154,30 @@ Mais seules les format suivants sont pris en compte:
 - HH:MM:SS,centième
 - HH:MM:SS,millième
 
+
+
+
+
++ Historique +
+++ v2.3 (3 Août 2017) ++
+- script "alt+control+f4" pour activer ou désactiver l'annonce des changements de sélection,
+- compatibilité avec audacity v2.1.3,
+- reprise du code.
+
+
+++ v2.2 (11 Juin 2015) ++
+- restructuration du code
+
+
+++ v2.1 (7 Octobre 2014) ++
+
+- compatibilité avec NVDA 2014.3
+- compatibilité avec Audacity v2.06
+
+
+++ v2.0 (8 mai 2014) ++
+- mise en place d'une surveillance des champ position et sélection pour annoncer les changements.
+
+
+++ v1.0 (24 janvier 2014) ++
+Création du module complémentaire 
