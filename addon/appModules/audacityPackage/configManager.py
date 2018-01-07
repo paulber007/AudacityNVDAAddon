@@ -157,7 +157,7 @@ class AddonConfigurationManager():
 			conf[SCT_Options][id] = not conf[SCT_Options][id]
 			self.saveSettings()
 		return conf[SCT_Options][id]
-	def toggleReportToolbarsNameOption(self, toggle = True):
+	def toggleReportToolbarNameOnFocusEnteredOption(self, toggle = True):
 		return self.toggleOption(ID_ReportToolbarsName , toggle)
 	
 	def toggleAutomaticSelectionChangeReportOption(self, toggle = True):

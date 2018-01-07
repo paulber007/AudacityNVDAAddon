@@ -63,7 +63,7 @@ Ainsi que les améliorations d'accessibilité:
 
 
 ++ Compatibilité ++
-La dernière version stable du module a été testée avec NVDA 2017.3 et audacity 2.2.0 .
+La dernière version stable du module a été testée avec NVDA 2017.3, NVDA 2017.4 et audacity v2.2.0 et v2.2.1 .
 
 Les précédentes versions d'Audacity ne sont pas supportées.
 
@@ -265,6 +265,11 @@ Mais seules les format suivants sont pris en compte:
 
 
 + Historique +
+++ v3.0.1 (4/01/2018) ++
+- correction du non affichage menu "Paramètres de configuration du module".
+- ajout directive pour compatibilité avec python 3.
+
+
 ++ v3.0 (11/2017) ++
 - compatibilité avec Audacity 2.2.0,
 - mise en place d'un intercepteur de touches clavier en remplacement du temporisateur de surveillance,

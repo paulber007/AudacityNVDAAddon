@@ -63,7 +63,7 @@ As well as accessibility improvements:
 
 
 ++ Compatibility ++ 
-The latest stable version of the module has been tested with NVDA 2017.3 and audacity 2.2.0 . 
+The latest stable version of the module has been tested with NVDA 2017.3, NVDA 2017.4 and audacity v2.2.0 and v2.2.1 . 
 
 Previous versions of Audacity are not supported. 
 
@@ -264,6 +264,12 @@ But only the following format are taken into account:
 
 
 + History + 
+++ v3.0.1 (4/01/2018) ++ 
+-  settings addon menu bug fix,
+- adding future directive for python 3 compatibility.
+
+
+
 ++ v3.0 (11/2017) ++ 
 - compatibility with Audacity 2.2.0, 
 new - scripts to announce the peak meters and sliders for playback or recording, 

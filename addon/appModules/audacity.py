@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import unicode_literals # To ensure coding compatibility with python 2 and 3.
 #audacity/__init__.py
 # a part of audacity appModule
 #Copyright (C) 2015-2017 Paulber19
@@ -61,7 +62,7 @@ GB_selection = None
 GB_recordButtonIsPressed = False
 
 
-_addonDir = os.path.join(os.path.dirname(__file__), "..").decode("mbcs") # The root of an addon folder
+_addonDir = os.path.join(os.path.dirname(__file__).decode("mbcs"), "..") # The root of an addon folder
 _curAddon = addonHandler.Addon(_addonDir) # Addon instance
 _addonSummary = _curAddon.manifest['summary']
 _addonVersion = _curAddon.manifest['version']
@@ -634,7 +635,7 @@ class AppModule(appModuleHandler.AppModule):
 		nextHandler()
 	def event_focusEntered(self, obj, nextHandler):
 		from audacityPackage.configManager import _addonConfigManager 
-		if _addonConfigManager.toggleReportToolbarsNameOption(False):
+		if _addonConfigManager.toggleReportToolbarNameOnFocusEnteredOption(False):
 			if obj.name is not None and  obj.role == controlTypes.ROLE_PANE and  obj.name != "panel" and  obj.name != "":
 				speech.speakMessage(obj.name)
 		nextHandler()
