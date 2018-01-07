@@ -1,94 +1,87 @@
+# -*- coding: UTF-8 -*-
 #audacity/package/objects.py
-#Copyright (C) 2015-2017 Paulber19
-#This file is covered by the GNU General Public License.
+# a part of audacity appModule
+# Author: paulber19
+# Copyright 2016-2017, released under GPL.
+#See the file COPYING for more details.
+
 import addonHandler
 addonHandler.initTranslation()
 from logHandler import log
 import api
+import gui
+import wx
 from oleacc import *
 from controlTypes import *
 
 #object hierarchy
-HIE_VueDePiste= 1
-HIE_LockingTool1 = 2
-HIE_LockingTool2 = 3
+HIE_TrackView= 1
+HIE_ToolDock1  = 2
+HIE_ToolDock2 = 3
 HIE_TransportToolBar = 4
 HIE_PauseButton = 5
 HIE_PlayButton = 6
 HIE_StopButton = 7
 HIE_RecordButton = 8
 HIE_SelectionToolBar = 9
-HIE_DurationChoice = 10
-HIE_SelectionStart = 11
-HIE_SelectionEnd = 12
-HIE_AudioPosition = 13
+HIE_AudioPosition = 10
+HIE_SelectionChoice = 11
+HIE_SelectionStart = 12
+HIE_SelectionEnd = 13
+HIE_SelectionDuration = 14
+HIE_SelectionCenter =  15
+HIE_AudacityTranscriptionToolbar = 16
+HIE_PlaybackSpeedSlider = 17
+HIE_RecordMeterPeak = 18
+HIE_PlayMeterPeak = 19
+HIE_SliderRecording = 20
+HIE_SliderPlayback= 21
 
 
-# for audacity 2.1.3.0 
-hie_2130 = {
-	HIE_VueDePiste: "1|1", # from mainFrameObject
-	HIE_LockingTool1 : "2|0", # from mainFrameObject
-	HIE_LockingTool2 : "3", # from mainFrameObject
-	HIE_TransportToolBar : "0", # from HIE_LockingTool1  object
+# for audacity 2.2.0 
+hie_2200 = {
+	HIE_TrackView: "1|0", # from mainFrameObject
+	HIE_ToolDock1 : "2|0", # from mainFrameObject
 	HIE_PauseButton : "1", # from HIE_TransportToolBar  object
 	HIE_PlayButton : "2", # from HIE_TransportToolBar 
 	HIE_StopButton : "3", # from HIE_TransportToolBar 
 	HIE_RecordButton : "6", # from HIE_TransportToolBar 
-	HIE_SelectionToolBar : "0", # from HIE_LockingTool2  object
-	HIE_DurationChoice : "5", # from  HIE_SelectionToolBar 
-	HIE_SelectionStart : "11", # from  HIE_SelectionToolBar object
-	HIE_SelectionEnd : "12", # from HIE_SelectionToolBar object
-	HIE_AudioPosition : "14" # from HIE_SelectionToolBar object
+	HIE_PlaybackSpeedSlider: "3|2", #  from HIE_ToolDock1
+	HIE_RecordMeterPeak: "1", # from HIE_RecordingMeterToolbar
+	HIE_PlayMeterPeak: "1", # from HIE_PlaybackMeterToolbar
+	HIE_SliderRecording : "2",# from HIE_MixerToolbar
+	HIE_SliderPlayback  :"4", # from HIE_MixerToolbar
+	HIE_ToolDock2 : "3", # from mainFrameObject
+	HIE_AudioPosition : "11", # from HIE_SelectionToolBar object
+	HIE_SelectionChoice : "13", # from  HIE_SelectionToolBar 
+	HIE_SelectionStart : "14", # from  HIE_SelectionToolBar object
+	HIE_SelectionDuration : "15", # from HIE_SelectionToolBar object
+	HIE_SelectionCenter : "16", # from HIE_SelectionToolBar object
+	HIE_SelectionEnd : "17", # from HIE_SelectionToolBar object
 	}
 
-hie_2060 = {
-	HIE_VueDePiste: "1|1", # from  mainFrameObject
-	HIE_LockingTool1 : "2", # from  mainFrameObject
-	HIE_LockingTool2 : "3", # from  mainFrameObject
-	HIE_TransportToolBar : "0", # from HIE_LockingTool1  object
-	HIE_PauseButton : "1", # from HIE_TransportToolBar  object
-	HIE_PlayButton : "2", # from HIE_TransportToolBar 
-	HIE_StopButton : "3", # from HIE_TransportToolBar 
-	HIE_RecordButton : "6", # from HIE_TransportToolBar 
-	HIE_SelectionToolBar : "0", # from  HIE_LockingTool2  object
-	HIE_DurationChoice : "5", # from HIE_SelectionToolBar 
-	HIE_SelectionStart : "11", # from  HIE_SelectionToolBar object
-	HIE_SelectionEnd : "12", # from  HIE_SelectionToolBar object
-	HIE_AudioPosition : "14" # from HIE_SelectionToolBar object
-	}
-#for audacity 2.0.3.0
-
-hie_2030 = {
-	HIE_VueDePiste: "1|1", # from objectFramePrincipal
-	HIE_LockingTool1 : "2", # from ObjectFramePrincipal
-	HIE_LockingTool2 : "3", # from  ObjectFramePrincipal
-	HIE_TransportToolBar : "0", # from  HIE_VerrouillageDOutils1
-	HIE_PauseButton : "1", # from HIE_BarreDOutilsTransport
-	HIE_PlayButton : "2", # from HIE_BarreDOutilsTransport
-	HIE_StopButton : "3", # from HIE_BarreDOutilsTransport
-	HIE_RecordButton : "6", # from HIE_BarreDOutilsTransport
-	HIE_SelectionToolBar : "0", # from LockingTool2 Object
-	HIE_DurationChoice : "4", # from HIE_BarreDOutilsSelection
-	HIE_SelectionStart : "10", # from HIE_BarreDOutilsSelection
-	HIE_SelectionEnd : "11", # from HIE_BarreDOutilsSelection
-	HIE_AudioPosition : "13" # from HIE_BarreDOutilsSelection
-	}
-_audacityHierarchyID = None
-	
 def initialize(appModule):
 	global _audacityHierarchyID
-	audacityID  = int("".join(appModule._get_productVersion().split(",")))
-	if audacityID >= 2130:
-		id = hie_2130
-	elif audacityID >= 2060:
-		id = hie_2060
+	version = appModule._get_productVersion()
+	audacityID  = int("".join(version.split(",")))
+	if audacityID >= 2200:
+		id = hie_2200
 	else:
-		id = hie_2030
+		log.warning(_("This version %s of Audacity is not  compatible with the add-on")%version)
+		wx.CallLater(1000, gui.messageBox,
+			# Translators: the label of a message box dialog.
+			_("This version %s of Audacity is not  compatible with the add-on")%version,			# Translators: the title of a message box dialog.
+			_("Audacity add-on  warning"),
+			wx.OK|wx.ICON_WARNING)
+		id = None
 	_audacityHierarchyID = id
 
 
 def getObjectByHierarchy ( oParent, iHierarchy):
-	sHierarchy = _audacityHierarchyID[iHierarchy]
+	try:
+		sHierarchy = _audacityHierarchyID[iHierarchy]
+	except:
+		return None
 	try:
 		o = oParent
 		if len(sHierarchy):
@@ -113,57 +106,51 @@ def mainFrameObject():
 	o = api.getFocusObject()
 	while o:
 		oGParent= o.parent.parent
-		if oGParent and oGParent.name.lower() == desktopName:
+		if oGParent and oGParent.name and oGParent.name.lower() == desktopName:
 			return o
 		
 		o = o.parent
 	log.error("error no mainFrameObject")
 	return None
 	
-def lockingTool1Object ():
+def toolDock1Object ():
 	o = mainFrameObject()
 	if o :
-		return getObjectByHierarchy(o, HIE_LockingTool1)
+		return getObjectByHierarchy(o, HIE_ToolDock1 )
 	return None
 
-def  lockingTool2Object():
+def  toolDock2Object():
 	o = mainFrameObject()
 	if o:
-		return  getObjectByHierarchy(o, HIE_LockingTool2)
+		return  getObjectByHierarchy(o, HIE_ToolDock2)
 
 	return None
 
 def selectionToolBarObject():
-	o = lockingTool2Object()
+	o = toolDock2Object()
+	if o :
+		#o = getObjectByHierarchy(o, HIE_SelectionToolBar)
+		o = o.lastChild
+		return o
+	return None
+def selectionToolBarObject1():
+	o = toolDock2Object()
 	if o :
 		o = getObjectByHierarchy(o, HIE_SelectionToolBar)
 		return o
-		#return getObjectByHierarchy(o, HIE_SelectionToolBar)
-	
-	o = mainFrameObject()
-	if o:
-		o= o.getChild(1)
-		count = o.childCount
-		while count:
-			count = count-1
-			if (o.name =="frame"
-				and o.getChild(1).name == _("Selection tool bar")):
-								return o.getChild(1)
-
-			o = o.next
-
 	return None
+
 
 def  audioPositionObject():
 	o = selectionToolBarObject()
-	if o :
+	if o  is not None:
 		return getObjectByHierarchy(o, HIE_AudioPosition)
 		
 	return None
-def durationChoiceObject ():
+def selectionChoiceObject ():
 	o = selectionToolBarObject()
 	if o :
-		return getObjectByHierarchy(o, HIE_DurationChoice)
+		return getObjectByHierarchy(o, HIE_SelectionChoice)
 
 	return None
 
@@ -180,10 +167,26 @@ def selectionEndObject ():
 	if o :
 		return getObjectByHierarchy(o, HIE_SelectionEnd)
 	return None
-def transportToolBarObject ():
-	o = lockingTool1Object()
+def selectionDurationObject ():
+	o = selectionToolBarObject()
 	if o :
-		return getObjectByHierarchy(o, HIE_TransportToolBar)
+		return getObjectByHierarchy(o, HIE_SelectionDuration)
+	return None
+def selectionCenterObject ():
+	o = selectionToolBarObject()
+	if o :
+		return getObjectByHierarchy(o, HIE_SelectionCenter)
+	return None
+
+def transportToolBarObject ():
+	obj = toolDock1Object ()
+	if obj :
+		# the only solution to find transport toolbar
+		for i in xrange(obj.childCount):
+			o = obj.getChild(i)
+			if o.childCount == 7:
+				return o
+		#return getObjectByHierarchy(o, HIE_TransportToolBar)
 
 	return None
 def pauseButtonObject ():
@@ -229,20 +232,69 @@ def isPressed( button):
 		return True
 	return False
 
-def isChecked(check):
-	if check == "durationChoice":
-		o = durationChoiceObject()
-	else:
-		# error
-		return None
-	return STATE_CHECKED in o.states
-		
-def inTracksPanelView(obj = None):
-	if obj == None:
-		obj = api.getFocusObject().IAccessibleObject
 
-	if ((obj.role == ROLE_PANE and obj.name == "panel") 
-		or (obj.role == ROLE_TABLE and obj.parent.name == "panel")
-		or (obj.role == ROLE_TABLEROW and obj.parent.parent.name == "panel")):
-		return True
-	return False
+
+def isAvailable( button):
+	try:
+		o = _buttonObjectsDic[button]()
+	except:
+		log.warning("Button %s not found"%button)
+		o =None
+	
+	if o and (o.IAccessibleObject.accState(0) & STATE_SYSTEM_UNAVAILABLE  or o.IAccessibleObject.accState(0) & STATE_SYSTEM_INVISIBLE ):
+		return False
+	return True
+
+def recordingMeterToolbarObject():
+	o = transportToolBarObject()
+	if o :
+		return o.next.next
+	return None
+
+def recordMeterPeakObject():
+	o = recordingMeterToolbarObject()
+	if o :
+		return getObjectByHierarchy(o, HIE_RecordMeterPeak)
+	return None
+def playbackMeterToolbarObject():
+	o = recordingMeterToolbarObject()
+	if o :
+		return o.next
+	return None
+
+def playMeterPeakObject():
+	o = playbackMeterToolbarObject()
+	if o :
+		return getObjectByHierarchy(o, HIE_PlayMeterPeak)
+	return None
+	
+def mixerToolbarObject():
+	o = playbackMeterToolbarObject()
+	if o :
+		return o.next
+	return None
+
+def sliderRecordingObject():
+	o = mixerToolbarObject()
+	if o :
+		return getObjectByHierarchy(o, HIE_SliderRecording)
+	return None
+	
+def sliderPlaybackObject():
+	o = mixerToolbarObject()
+	if o :
+		return getObjectByHierarchy(o, HIE_SliderPlayback)
+	return None
+
+
+def transcriptionToolbarObject():
+	o = mixerToolbarObject()
+	if o :
+		return o.next.next
+	return None
+def playbackSpeedSliderObject():
+	o = transcriptionToolbarObject()
+	print "o: %s"%o.name
+	if o :
+		return o.getChild(2)
+	return None

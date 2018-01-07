@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.sf.net">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" HREF="..\style.css">
+<TITLE>Module complémentaire pour Audacity - manuel utilisateur</TITLE>
+</HEAD><BODY BGCOLOR="white" TEXT="black">
+<P ALIGN="center"><CENTER><H1>Module complémentaire pour Audacity - manuel utilisateur</H1>
+<FONT SIZE="4">
+<I>Auteur: paulber007 </I><BR>
+URL: paulber007@wanadoo.fr
+</FONT></CENTER>
+
+<A NAME="toc"></A>
+<H2>Sommaire</H2>
+  <UL>
+
+  <LI><A HREF="#toc2">1. Introduction</A>
+    <UL>
+    <LI><A HREF="#toc3">1.1. Fonctionnalités</A>
+    <LI><A HREF="#toc4">1.2. Compatibilité</A>
+    <LI><A HREF="#toc5">1.3. Configuration à respecter</A>
+    <LI><A HREF="#toc6">1.4. Activation des scripts</A>
+    </UL>
+  <LI><A HREF="#toc7">2. Configuration du module</A>
+  <LI><A HREF="#toc8">3. Les scripts</A>
+    <UL>
+    <LI><A HREF="#hdr1">3.1. Annonce de la position audio</A>
+    <LI><A HREF="#hdr2">3.2. Annonce des informations de sélection</A>
+    <LI><A HREF="#hdr3">3.3. Annonce de l'état enfoncé des boutons Pause, lecture ou enregistrement</A>
+    <LI><A HREF="#hdr4">3.4. Annonce du niveau crète des vu-mètres de lecture ou d'enregistrement</A>
+    <LI><A HREF="#hdr5">3.5. Annonce du niveau du curseur des potentiomètres de lecture ou enregistrement</A>
+    <LI><A HREF="#hdr6">3.6. Affichage du guide d'Audacity</A>
+    </UL>
+  <LI><A HREF="#toc15">4. Améliorations d'accessibilité</A>
+    <UL>
+    <LI><A HREF="#hdr100">4.1. Annonce automatique de la position audio</A>
+    <LI><A HREF="#hdr101">4.2. Annonce automatique de la sélection</A>
+    <LI><A HREF="#HDR102">4.3. Utilisation de la barre d'espace ou de la touche Entrée pour appuyer sur un bouton</A>
+    <LI><A HREF="#HDR103">4.4. Vocalisation des zones d'édition du temps dans la barre d'outils Sélection Audacity</A>
+    <LI><A HREF="#hdr104">4.5. Autres adapttations</A>
+    </UL>
+  <LI><A HREF="#toc21">5. Historique</A>
+    <UL>
+    <LI><A HREF="#toc22">5.1. v3.0 (11/2017)</A>
+    <LI><A HREF="#toc23">5.2. v2.3 (08/2017)</A>
+    <LI><A HREF="#toc24">5.3. v2.2 (06/2015)</A>
+    <LI><A HREF="#toc25">5.4. v2.1 (10/2014)</A>
+    <LI><A HREF="#toc26">5.5. v2.0 (05/2014)</A>
+    <LI><A HREF="#toc27">5.6. v1.0 (01/2014)</A>
+    </UL>
+  </UL>
+
+<P></P>
+<A NAME="toc2"></A>
+<H2>1. Introduction</H2>
+<A NAME="toc3"></A>
+<H3>1.1. Fonctionnalités</H3>
+<P>
+Ce module complémentaire  apporte les scripts:
+</P>
+<UL>
+<LI><A HREF="#HDR1">Annoncer la position du curseur audio</A>,
+<LI><A HREF="#HDR2">Annoncer les informations de sélection</A>, 
+<LI><A HREF="#HDR3">Annoncer l'état des boutons "Lecture" et "Pause"</A>,
+<LI><A HREF="#hdr4">Annoncer le niveau crète des vu-mètres de lecture  ou d'enregistrement</A>,
+<LI><A HREF="#hdr5">Annoncer le niveau  des potentiomètres de lecture ou d'enregistrement</A>,
+<LI><A HREF="#hdr6">afficher le guide d'audacity</A>,
+</UL>
+
+<P>
+Ainsi que les améliorations d'accessibilité:
+</P>
+<UL>
+<LI><A HREF="#HDR100">Annonce automatique de la position audio</A>,
+<LI><A HREF="#HDR101">Annonce automatique de la sélection</A>,
+<LI><A HREF="#HDR102">Utilisation de la barre d'espace ou la touche Entrée pour appuyer sur un bouton</A>,
+<LI><A HREF="#HDR103">Vocalisation des zone d'édition d'un temps de la barre d'outils Sélection Audacity</A>,
+<LI><A HREF="#hdr104">diverses autres adaptations</A>.
+</UL>
+
+<A NAME="toc4"></A>
+<H3>1.2. Compatibilité</H3>
+<P>
+La dernière version stable du module a été testée avec NVDA 2017.3 et audacity 2.2.0 .
+</P>
+<P>
+Les précédentes versions d'Audacity ne sont pas supportées.
+</P>
+<A NAME="toc5"></A>
+<H3>1.3. Configuration à respecter</H3>
+<P>
+Pour un bon fonctionnement du module, il est nécessaire de :
+</P>
+<UL>
+<LI>conserver l'affichage par défaut mise en place lors de l'installation d'audacity, surtout celui des barres d'outils. Audacity permet de réinitialiser l'affichage de celles-ci avec le sou-menu "Reset" du sous-menu "barres d'outils" du menu "Affichage". Mais il est nécessaire de redémarrer Audacity après l'avoir utilisé.
+<LI>Conserver le format  d'affichage du temps défini par défaut ou choisir  parmi un des formats indiqués au chapitre <A HREF="#HDR103">Vocalisation des zones d'édition du temps dans la boite d'outils Sélection Audacity</A>
+</UL>
+
+<A NAME="toc6"></A>
+<H3>1.4. Activation des scripts</H3>
+<P>
+Chaque  script peut être  activé de deux manière:
+</P>
+<UL>
+<LI>soit à l'aide d'un geste de commande classique ,
+<LI>soit en utilisant l'interpréteur de commandes du module.
+</UL>
+
+<P>
+Dans la boite de dialogue "Gestes de commendes " de NVDA  ,  les scripts apportés par le module sont placées dans la catégorie "Audacity".
+</P>
+<P>
+Pour les scripts pouvant être lancés par une commande  de l'interpréteur, cell-ci est indiquée à la suite de la description du script.
+</P>
+<P>
+Par défaut, la grande majorité des scripts pouvant être lancer par l'interpréteur de commandes  ne sont affectés à aucun geste de commande.
+</P>
+<P>
+L'interpréteur de commande  se lance à l'aide du geste de commande "NVDA + Espace"  . Un bip sonnore est alors audible.
+</P>
+<P>
+Aujourd'hui, les commandes ne sont pas modifiables.
+</P>
+<P>
+La commande "h" de l'interpréteur  liste l'ensemble des  commandes et la commande "g" affiche le manuel d'utilisation du module.
+</P>
+<P>
+L'interpréteur de commandes s'arrête soit:
+</P>
+<UL>
+<LI>en tapant la touche "Echapp",
+<LI>soit automatiquement  si une commande est tapée. Si cette commend ne correspond à aucune fonctionnalité, un bip sonore le signale.
+</UL>
+
+<A NAME="toc7"></A>
+<H2>2. Configuration du module</H2>
+<P>
+Le module installe dans le menu "Préférences" de NVDA le sous-menu "Paramètres du module complémentaire Audacity".
+Celui-ci permet d'afficher le dialogue de configuration des paramètres du module, à savoir:
+</P>
+<UL>
+<LI>la case à cocher "Annoncer automatiquement les changements de la sélection",
+<LI>la case à cocher "utiliser la barre d'espace ou la touche Entrée pour appuyer sur un bouton",
+<LI>la case à cocher "Annoncer le nom des barres d'outils".
+</UL>
+
+<P>
+Cette configuration est sauvegarder dans le fichier "audacityAddon".ini enregistré dans le dossier de configuration utilisateur de NVDA.
+</P>
+<A NAME="toc8"></A>
+<H2>3. Les scripts</H2>
+<A NAME="hdr1"></A>
+<H3>3.1. Annonce de la position audio</H3>
+<P>
+Pour utiliser ce script, il faut que le focus soit dans la vue de piste.
+</P>
+<P>
+Ce script se lance par la commande "a" de l'interpréteur.
+</P>
+<P>
+Aucun geste de commande ne lui est affecté par défaut.
+</P>
+<P>
+Il annonce  le temps indiqué dans le champ "position audio" de la barre d'outils "Sélection" (ou Audacity selection Toolbar",nom non traduit).
+</P>
+<A NAME="hdr2"></A>
+<H3>3.2. Annonce des informations de sélection</H3>
+<P>
+Pour utiliser ce script, il faut que le focus soit dans la vue de piste.
+</P>
+<P>
+La barre d'outils de sélection présente plusieurs informations:
+</P>
+<UL>
+<LI>les limites de la sélection (début et fin),
+<LI>la durée de la sélection,
+<LI>le centre de la sélection.
+</UL>
+
+<P>
+Il est possible de les faire annoncer tout en restant dans la vue de piste avec les scripts suivants:
+</P>
+<UL>
+<LI>annoncer le début et la fin de la sélection: commande "s" de l'inteerpréteur,
+<LI>annoncer la durée de la sélection : commande "majuscule + s" de l'interpréteur,
+<LI>annoncer le centre de la sélection: commande "control + s" de l'interpréteur,
+<LI>annoncer le début et la fin de la sélection. Deux appuis: annoncer la durée. Trois appuis: annoncer le centre: sans commande interpréteur.
+</UL>
+
+<P>
+Par défaut, Aucun geste de commandes ne leur est affecté.
+</P>
+<A NAME="hdr3"></A>
+<H3>3.3. Annonce de l'état enfoncé des boutons Pause, lecture ou enregistrement</H3>
+<P>
+Pour utiliser ce script, il faut que le focus se trouve dans la vue de piste.
+</P>
+<P>
+Il se lance par la commande "f5" de l'interpréteur.
+</P>
+<P>
+Par défaut, aucun geste de commande ne lui est affecté.
+</P>
+<P>
+Il annonce l'état  "Enfoncé" des boutons "Lecture",  "Pause" et "Enregistrement".
+</P>
+<P>
+Dans le cas où aucun bouton n'est enfoncé, l'annonce "Aucun bouton enfoncé" est diffusée.
+</P>
+<A NAME="hdr4"></A>
+<H3>3.4. Annonce du niveau crète des vu-mètres de lecture ou d'enregistrement</H3>
+<P>
+Audacityprésente les vu-mètres de lecture et d'enregistrement permettant de surveiller les pics de lecture ou d'enregistrement.
+</P>
+<P>
+Les scripts suivants permettent de connaitre les niveaux de ces vu-mètres sans bouger le focus de la vue de pistes:
+</P>
+<UL>
+<LI>annoncer le niveau crète du vu-mètre de lecture: commande "f7" de l'interpréteur,
+<LI>annoncer le niveau crète du vu-mmètre d'enregistrement: commande "f87" de l'interpréteur.
+</UL>
+
+<P>
+Par défaut, aucun geste de commande ne leur est affecté.
+</P>
+<A NAME="hdr5"></A>
+<H3>3.5. Annonce du niveau du curseur des potentiomètres de lecture ou enregistrement</H3>
+<P>
+La barre d'outils de mixage (ou "Audacity mixer Toolbar",  nom non traduit) présente les potentiomètres de lecture et d'enregistrement permettant de régler les niveaux de lecture ou d'enregistrement.
+</P>
+<P>
+Les scripts suivants permettent de connaitre les niveaux de ces curseurs sans bouger le focus de la vue de pistes:
+</P>
+<UL>
+<LI>annoncer le niveau du curseur de lecture: commande "f9" de l'interpréteur,
+<LI>annoncer le niveau du curseur d'enregistrement: commande "f10" de l'interpréteur.
+<P></P>
+Par défaut, aucun geste de commande ne leur est affecté.
+</UL>
+
+<A NAME="hdr6"></A>
+<H3>3.6. Affichage du guide d'Audacity</H3>
+<P>
+Ce script se lance par la commande "control+g" de l'interpréteur.
+</P>
+<P>
+Par défaut, aucun geste de commande ne lui est affecté.
+</P>
+<P>
+ Il permet de faire afficher le guide  d'Audacity écrit par David Bailes pour les utilisateurs de l'editeur vocal JAWS (C).
+</P>
+<A NAME="toc15"></A>
+<H2>4. Améliorations d'accessibilité</H2>
+<A NAME="hdr100"></A>
+<H3>4.1. Annonce automatique de la position audio</H3>
+<P>
+En lecture audio ou non, les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le curseur audio:
+</P>
+<UL>
+<LI>"Majuscule + a"ou "x": lecture / stop  et positionnement du curseur audio
+<LI>"flèche gauche": petit saut à gauche,
+<LI>"flèche droite": petit saut à droite,
+<LI>"début": saut au début,
+<LI>"fin": saut à la fin,
+<LI>",": petit saut à gauche,
+<LI>".": petit saut à droite,
+<LI>"Majuscule + ,": grand saut à gauche,
+<LI>"Majuscule + .": grand saut à droite,
+<LI>"espace": lecture /stop
+</UL>
+
+<P>
+En lecture audio arrêtée et après l'activation du raccourci, le champ "position audio" de la barre d'outils "Sélection" est automatiquement annoncé  si un changement a eu lieu et sous la forme:
+</P>
+<UL>
+<LI>annonce du label du champ("position audio",
+<LI>annonce du contenu du champ formaté pour ne pas dire les zéros.
+</UL>
+
+<P>
+Le retour de la position audio en début de sélection est signalé.
+</P>
+<P>
+Ces raccourcis peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
+</P>
+<A NAME="hdr101"></A>
+<H3>4.2. Annonce automatique de la sélection</H3>
+<P>
+Les raccourcis suivants d'Audacity (définis par défaut) permettent de définir ou de déplacer le début et la fin de la sélection:
+</P>
+<UL>
+<LI>"Majuscule + début": sélection jusqu'au début,
+<LI>"Majuscule + fin": sélection jusqu'à la fin,
+<LI>"Majuscule + j": sélection du début de la piste jusqu'au curseur,
+<LI>"Majuscule + k": sélection du curseur jusqu'à la fin de la piste
+<LI>"Majuscule + flèche gauche": étendre la sélection à gauche , 
+<LI>"Control + Majuscule + flèche droite": réduire la sélection à droite 
+<LI>Majuscule + flèche droite": étendre la sélection à droite,
+<LI>"Control + Majuscule + flèche gauche": réduire la sélection à gauche
+</UL>
+
+<P>
+Si l'option "Annoncer automatiquement les changements de sélection" est cochée,  En lecture arrêtée et après l'activation du raccourci, les   changements de sélection sont annoncés
+Suivant le type de raccourci, l'un  ou l'autre ou les deux des champs de sélection de la barre d'outils "Sélection" sont annoncés sous la forme:
+</P>
+<UL>
+<LI>annonce du label du champ,
+<LI>annonce de son contenu formaté pour ne pas dire les zéros.
+</UL>
+
+<P>
+Comme tous les labels annoncés sont ceux qui sont affichés par Audacity, il peut y avoir des incohérences dues à la traduction  ou au codage (par exemple, sélection fin au lieu de fin de la sélection", "durée sélection" au lieu de "longueur de la sélection").
+</P>
+<P>
+Ces raccourcis  peuvent être modifiés par l'utilisateur sans impacter ce fonctionnement.
+</P>
+<P>
+La commande "f4" de l'interpréteur du module  permet d'activer ou de désactiver cette annonce des changements de sélection quand celle-ci devient gênante.
+Elle fait basculer l'état de l'option "Annoncer automatiquement les changements de sélection" de l'état "coché" à l'état "décoché" ou réciproquement.
+</P>
+<A NAME="HDR102"></A>
+<H3>4.3. Utilisation de la barre d'espace ou de la touche Entrée pour appuyer sur un bouton</H3>
+<P>
+Dans Audacity, la barre d'espace est prévue pour lancer ou arrêter la lecture audio, mais pas pour appuyer sur un bouton.
+</P>
+<P>
+Pour appuyer sur le bouton, il faut utiliser la touche "Entrée" mais cela déplace le focus sur l'élément suivant de la fenêtre et aucun changement d'état du bouton n'est vocalisé.
+</P>
+<P>
+Si l'option "Utiliser la barre d'espace ou la touche Entrée pour appuyer sur un bouton" est cochée, il est alors possible d'appuyer  sur un bouton avec la barre d'espace ou la touche Entrée et les changements sont alors annoncés.
+</P>
+<A NAME="HDR103"></A>
+<H3>4.4. Vocalisation des zones d'édition du temps dans la barre d'outils Sélection Audacity</H3>
+<P>
+La Barre d'outils Sélection Audacity  (ou Audacity Sélection Toolbar non traduit) présente des zones d'édition de temps.
+</P>
+<P>
+Ce temps est inscrit suivant un format que l'on configure avec le menu contextuel.
+</P>
+<P>
+Pour modifier ce temps, il faut se placer sur le chiffre à modifier  (par flèche droite ou gauche)  et l'augmenter ou le diminuer avec les flèches haute ou bas.
+</P>
+<P>
+Ce module permet une meilleure vocalisation d'une part  en indiquant le temps en heure, minute et secondes et d'autre part, en   indiquant la nature du chiffre qui est modifié:
+</P>
+<P>
+-  les dizaines et les unités pour les heures, les minutes et les secondes,
+-  les dixièmes, centièmes et les  millièmes pour les secondes.
+</P>
+<P>
+Mais seules les format suivants sont pris en compte:
+</P>
+<UL>
+<LI>HH:MM:SS,
+<LI>HH:MM:SS,centième
+<LI>HH:MM:SS,millième
+</UL>
+
+<A NAME="hdr104"></A>
+<H3>4.5. Autres adapttations</H3>
+<UL>
+<LI>Les pistes  ne sont plus annoncées comme étant des lignes d'un tableau et la vue de piste comme un tableau.
+<LI>L'état "non sélectionné" d'une piste n'est plus vocalisé.
+<LI>l'absence de piste quand le focus arrive dans la vue de piste est annoncée.
+<LI>Le nom des barres d'outils est annoncé lors   du déplacement du focus par "control+f6" ou "majuscule+ control+f6" (peut-être désactivé par configuration de l'option "Annoncer le nom des barres d'outils").
+</UL>
+
+<A NAME="toc21"></A>
+<H2>5. Historique</H2>
+<A NAME="toc22"></A>
+<H3>5.1. v3.0 (11/2017)</H3>
+<UL>
+<LI>compatibilité avec Audacity 2.2.0,
+nouveaux - scripts pour annoncer les vu-mètres et curseurs de lecture ou enregistrement,
+<LI>nouveaux scripts pour annoncer la durée et la position du centre de la sélection,
+-  restriction de l'utilisation de certains  scripts à  la vue de piste conformémant à la documentation,
+<LI>mise en place de l'interpréteur de commande,
+<LI>mise en place d'un intercepteur de touches clavier en remplacement du temporisateur de surveillance,
+<LI>mise en place d'un fichier de configuration,
+<LI>structuration du module pour le dépot sur github.
+<LI>mise à jour du manuel utilisateur.
+</UL>
+
+<A NAME="toc23"></A>
+<H3>5.2. v2.3 (08/2017)</H3>
+<UL>
+<LI>script "alt+control+f4" pour activer ou désactiver l'annonce des changements de sélection,
+<LI>compatibilité avec audacity v2.1.3,
+<LI>reprise du code.
+</UL>
+
+<A NAME="toc24"></A>
+<H3>5.3. v2.2 (06/2015)</H3>
+<UL>
+<LI>restructuration du code
+</UL>
+
+<A NAME="toc25"></A>
+<H3>5.4. v2.1 (10/2014)</H3>
+<UL>
+<LI>compatibilité avec NVDA 2014.3
+<LI>compatibilité avec Audacity v2.06
+</UL>
+
+<A NAME="toc26"></A>
+<H3>5.5. v2.0 (05/2014)</H3>
+<UL>
+<LI>mise en place d'une surveillance des champ position et sélection pour annoncer les changements.
+</UL>
+
+<A NAME="toc27"></A>
+<H3>5.6. v1.0 (01/2014)</H3>
+<P>
+Création du module complémentaire 
+</P>
+
+<!-- html code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags .\doc\fr\addonUserManual.t2t -->
+</BODY></HTML>
