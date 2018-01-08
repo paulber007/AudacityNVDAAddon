@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
-from __future__ import unicode_literals # To ensure coding compatibility with python 2 and 3.
-#audacity/__init__.py
-# a part of audacity appModule
+#appModules/___init__.py
+# a part of audacity add-on
 #Copyright (C) 2015-2017 Paulber19
 #This file is covered by the GNU General Public License.
 # Released under GPL 2
@@ -768,7 +767,8 @@ class AppModule(appModuleHandler.AppModule):
 		if not self.inTrackView(api.getFocusObject()):
 			return
 		speed = audacityPackage.objects.playbackSpeedSliderObject().value
-		ui.message("playback speed: %s"%speed)
+		# Translators: message to the user to report playback speed
+		ui.message(_("playback speed: %s")%speed)
 	
 	def script_reportPlayMeterPeak(self,gesture):
 		stopTaskTimer()
@@ -828,12 +828,18 @@ class AppModule(appModuleHandler.AppModule):
 	def script_displayAddonUserManual (self, gesture):
 		stopTaskTimer()
 		from languageHandler import curLang
+		lang = curLang
 		docPath = os.path.join(_addonDir , "doc")
 		manual =  _curAddon.manifest["docFileName"]
 		defaultPath = os.path.join(docPath, "en", manual)
-		localPath = os.path.join(docPath, curLang, manual)
-		if os.path.exists(localPath):
-			self.startFile(localPath)
+		localePath = os.path.join(docPath, lang, manual)
+		if os.path.exists(localePath):
+			self.startFile(localePath)
+			return
+		lang = curLang.split("_")[0]
+		localePath = os.path.join(docPath, lang, manual)
+		if os.path.exists(localePath):
+			self.startFile(localePath)
 		elif os.path.exists(defaultPath):
 			self.startFile(defaultPath)
 		else:
@@ -842,11 +848,16 @@ class AppModule(appModuleHandler.AppModule):
 	def script_displayAudacityGuide (self, gesture):
 		stopTaskTimer()
 		from languageHandler import curLang
-		#docPath=os.path.join(os.path.dirname(__file__), "..\\doc").decode("mbcs")
+		lang = curLang
 		docPath = os.path.join(_addonDir , "doc")
 		guide = "audacityGuide.html"
 		defaultPath = os.path.join(docPath, "en", guide)
-		localPath = os.path.join(docPath, curLang, guide)
+		localPath = os.path.join(docPath, lang, guide)
+		if os.path.exists(localPath):
+			self.startFile(localPath)
+			return
+		lang = curLang.split("_")[0]
+		localPath = os.path.join(docPath, lang, guide)
 		if os.path.exists(localPath):
 			self.startFile(localPath)
 		elif os.path.exists(defaultPath):

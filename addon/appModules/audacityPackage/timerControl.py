@@ -1,4 +1,5 @@
-#audacity/audacityPackage/timerControl.py
+#appModules/audacityPackage/timerControl.py
+# a part of audacity add-on
 #Copyright (C) 2015-2017 Paulber19
 #This file is covered by the GNU General Public License.
 import addonHandler
@@ -213,6 +214,8 @@ class SelectionTimers(object):
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), selectionDuration, selectionCenter) = selection
 		if selectionDuration[1] is None:
 			return None
+		if self.sayIfNoSelection(selectionStartTime, selectionEndTime):
+			return None
 		(selectionDurationLabel,selectionDurationTime) = selectionDuration 
 		textList = []
 		# Translators: message to user to indicate selection informations
@@ -225,9 +228,11 @@ class SelectionTimers(object):
 		if selection == None:
 			selection = self.getSelection()
 		if selection == None:
-			return  None		
+			return  None
 		((selectionStartLabel, selectionStartTime), (selectionEndLabel, selectionEndTime), selectionDuration, selectionCenter) = selection
 		if selectionCenter[1] is None:
+			return None
+		if self.sayIfNoSelection(selectionStartTime, selectionEndTime):
 			return None
 		(selectionCenterLabel,selectionCenterTime) = selectionCenter
 		textList = []

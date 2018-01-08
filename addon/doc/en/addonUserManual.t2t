@@ -264,6 +264,10 @@ But only the following format are taken into account:
 
 
 + History + 
+++ v3.1 (7/01/2018) ++ 
+- addon modified  to be in the addon template form and stored in  git hub repository.
+
+
 ++ v3.0.1 (4/01/2018) ++ 
 -  settings addon menu bug fix,
 - adding future directive for python 3 compatibility.

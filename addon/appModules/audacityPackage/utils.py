@@ -1,4 +1,4 @@
-#audacityPackage/utils.py
+#appModules/audacityPackage/utils.py
 #A part of audacity add-on
 #Copyright (C) 2016 
 #This file is covered by the GNU General Public License.

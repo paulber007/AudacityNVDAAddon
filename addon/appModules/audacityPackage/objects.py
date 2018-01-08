@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-#audacity/package/objects.py
-# a part of audacity appModule
+#appModules/audacityPackage/objects.py
+# a part of audacity add-on
 # Author: paulber19
 # Copyright 2016-2017, released under GPL.
 #See the file COPYING for more details.

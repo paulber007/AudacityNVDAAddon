@@ -1,7 +1,9 @@
-#A part of NonVisual Desktop Access (NVDA)
-#Copyright (C) 2008-2016 NV Access Limited, Dinesh Kaushal, Davy Kager
-#This file is covered by the GNU General Public License.
+#appModules/audacityPackage/NVDAStrings.py
+# a part of audacity add-on
+# Author: paulber19
+# Copyright 2016-2017, released under GPL.
 #See the file COPYING for more details.
+
 
 def NVDAString(s):
 	""" A simple function to bypass the addon translation system,

@@ -265,6 +265,10 @@ Mais seules les format suivants sont pris en compte:
 
 
 + Historique +
+++ v3.1 (7/01/2018) ++
+- mise en place du module sous la forme addon template et sous dépot github.
+
+
 ++ v3.0.1 (4/01/2018) ++
 - correction du non affichage menu "Paramètres de configuration du module".
 - ajout directive pour compatibilité avec python 3.

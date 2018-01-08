@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-#audacity/audacityPackage/ou_time.py
-# a part of audacity appModule
+#appModules/audacityPackage/ou_time.py
+# a part of audacity add-on
 #Copyright (C) 2015-2017 Paulber19
 #This file is covered by the GNU General Public License.
 # Released under GPL 2
